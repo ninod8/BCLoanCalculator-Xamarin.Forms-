@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BCLoanCalculator.AnnuityMonthly"
+             BackgroundColor="#FFFFFF">
+  
+  <ScrollView>
+    <StackLayout Padding="10">
+      <Label x:Name ="MainLabel" Text="ყოველთვიური ანუიტეტი" Font="Bold" Margin="15,5"/>
+      
+      <Label x:Name="LoanAmountLabel" Text="სესხის თანხა" FontSize="13" Font="Bold" Margin="15,5"/>
+      <Entry Keyboard="Numeric" Text="{Binding LoanAmount}" x:Name="AnnuityMonthlyEntry" BackgroundColor="White" Margin="15,5"/>
+      
+      <Label x:Name="AnnuityMonthlyStartDateLabel" Text="სესხის გაცემის თარიღი" FontSize="13" Font="Bold" Margin="15,5"/>
+      <DatePicker x:Name="DP0" Date="{Binding StartDate}" Margin="15,5"/>
+      
+      <Label  x:Name="AnnuityMonthlyFirstPaymentDateLabel" Text="პირველი გადახდის თარიღი" FontSize="13" Font="Bold" Margin="15,5"/>
+      <DatePicker x:Name="DP1" Date="{Binding FirstPaymentDate}" Margin="15,5"/>
+      
+      <Label x:Name="AnnuityMonthlyEndDateLabel" Text="სესხის დაფარვის თარიღი" FontSize="13" Font="Bold" Margin="15,5"/>
+      <DatePicker x:Name="DP2" Date="{Binding EndDate}" Margin="15,5"/>
+
+      <Label x:Name="AnnuityMonthlyTermLabel" Text="სესხის ვადა (თვე)" FontSize="13" Font="Bold" Margin="15,5"/>
+      <Entry Keyboard="Numeric" Text="{Binding TermsOfLoan}" x:Name="AnnuityMonthlyTermsOfLoanEntry" BackgroundColor="White" Margin="15,5"/>
+      
+      <Label x:Name="AnnuityMonthlyMonthlyRateLabel" Text="ყოველთვიური საპროცენტო განაკვეთი (%)" Font="Bold" FontSize="13" Margin="15,5"/>
+      <Entry Keyboard="Numeric" Text="{Binding MonthlyRate}" x:Name="AnnuityMonthlyRateEntry" BackgroundColor="White" Margin="15,5"/>
+      
+      <Label x:Name="AnnuityMonthlyAnnualRateLabel" Text="წლიური საპროცენტო განაკვეთი (%)" Font="Bold" FontSize="13" Margin="15,5"/>
+      <Entry Keyboard="Numeric" Text="{Binding AnnualRate}" x:Name="AnnuityAnnualRateEntry" BackgroundColor="White"  Margin="15,5"/>
+      
+      <Label x:Name="AnnuityMonthlyInterestOnlyLabel" Text="საშეღავათო პერიოდი" FontSize="13" Font="Bold" Margin="15,5"/>
+      <Entry Keyboard="Numeric" Text="{Binding InterestOnly}" x:Name="AnnuityMonthlyInterestOnlyEntry" BackgroundColor="White" Margin="15,5"/>
+      
+      <Label x:Name="AnnuityMonthlyPaymentLabel" Text="ყოველდღიური გადასახადი" Font="Bold" FontSize="13"  Margin="15,5"/>
+      <Entry Keyboard="Numeric" Text="{Binding Payment}" x:Name="PaymentEntry" BackgroundColor="White" Margin="15,5"/>
+    </StackLayout>
+  </ScrollView>
+</ContentPage>
