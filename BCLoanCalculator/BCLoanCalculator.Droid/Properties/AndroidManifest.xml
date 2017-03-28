@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 	<uses-sdk android:minSdkVersion="15" />
 	<application android:label="BCLoanCalculator.Droid"></application>
-  <Resources>
-    <Resource Language="KA-ge"/>
-  </Resources>
+	<Resources>
+		<Resource Language="KA-ge" />
+	</Resources>
 </manifest>

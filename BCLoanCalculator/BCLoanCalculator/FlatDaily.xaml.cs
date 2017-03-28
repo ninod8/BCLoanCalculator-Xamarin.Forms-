@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,7 +46,7 @@ namespace BCLoanCalculator
             FlatDailyTermLabel.FontSize = 14;
             #endregion
         }
-        public class FlatRateDailyCalc
+        public class FlatRateDailyCalc : INotifyPropertyChanged
         {
             #region privateVariables
             private string loanAmount;
@@ -54,7 +56,14 @@ namespace BCLoanCalculator
             private string payment;
             private DateTime startDate;
             private DateTime endDate;
+
+
             #endregion
+            public event PropertyChangedEventHandler PropertyChanged;
+            void OnPropertyChanged([CallerMemberName] string name = "")
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            }
 
             public string LoanAmount
             {
@@ -71,13 +80,39 @@ namespace BCLoanCalculator
             public string DailyRate
             {
                 get { return dailyRate; }
-                set { dailyRate = value; }
+                set
+                {
+                    try
+                    {
+                        dailyRate = value;
+                        annualRate = Math.Round((Convert.ToDouble(dailyRate) * 365), 3, MidpointRounding.AwayFromZero).ToString();
+                        OnPropertyChanged();
+                        OnPropertyChanged(nameof(AnnualRate));
+                    }
+                    catch (Exception)
+                    {
+                        dailyRate = "";
+                    }
+                }
             }
 
             public string AnnualRate
             {
                 get { return annualRate; }
-                set { annualRate = value; }
+                set
+                {
+                    try
+                    {
+                        annualRate = value;
+                        DailyRate = Math.Round((Convert.ToDouble(annualRate) / 365), 3, MidpointRounding.AwayFromZero).ToString();
+                        OnPropertyChanged();
+                        OnPropertyChanged(nameof(DailyRate));
+                    }
+                    catch (Exception)
+                    {
+                        annualRate = "";
+                    }
+                }
             }
 
             public string Payment

@@ -6,9 +6,9 @@
                           BackgroundColor="#FFFFFF"
  >
   <ScrollView>
-  <StackLayout x:Name="Stack">
-    <Label x:Name ="Label" Margin="10,40" />
-  <Label x:Name ="Label2"  Margin="10,40" />
+  <StackLayout x:Name="Stack" Margin="5,40" >
+    <Label x:Name ="Label" Margin="10,40" Font="Bold"/>
+  <Label x:Name ="Label2"  Margin="10,40" Font="Bold"/>
     <Image x:Name="bc" Source="bc.png" Margin="10,40"/>            
   </StackLayout>
  </ScrollView>

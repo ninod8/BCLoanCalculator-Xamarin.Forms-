@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -51,7 +53,7 @@ namespace BCLoanCalculator
             AnnuityMonthlyTermLabel.FontSize = 14;
             #endregion
         }
-        public class AnnuityMonthlyCalc
+        public class AnnuityMonthlyCalc:INotifyPropertyChanged
         {
             #region privateVariables
             private string loanAmount;
@@ -63,8 +65,14 @@ namespace BCLoanCalculator
             private DateTime endDate;
             private DateTime firstPaymentDate;
             private string interestOnly;
-            #endregion
 
+
+            #endregion
+            public event PropertyChangedEventHandler PropertyChanged;
+            void OnPropertyChanged([CallerMemberName] string name="")
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            }
             public string LoanAmount
             {
                 get { return loanAmount; }
@@ -80,13 +88,25 @@ namespace BCLoanCalculator
             public string MonthlyRate
             {
                 get { return monthlyRate; }
-                set { monthlyRate = value; }
+                set
+                {
+                    monthlyRate = value;
+                    annualRate = Math.Round((Convert.ToDouble(monthlyRate) * 12),3,MidpointRounding.AwayFromZero).ToString();
+                    OnPropertyChanged(nameof(AnnualRate));
+                    OnPropertyChanged();
+                }
             }
 
             public string AnnualRate
             {
                 get { return annualRate; }
-                set { annualRate = value; }
+                set
+                {
+                    annualRate = value;
+                    monthlyRate = Math.Round((Convert.ToDouble(annualRate) / 12),3,MidpointRounding.AwayFromZero).ToString();
+                    OnPropertyChanged(nameof(monthlyRate));
+                    OnPropertyChanged();
+                }
             }
 
             public string Payment

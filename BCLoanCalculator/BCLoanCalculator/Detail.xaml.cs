@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Windows.UI.Xaml.Documents;
 using Xamarin.Forms;
 
 namespace BCLoanCalculator
@@ -21,11 +21,10 @@ namespace BCLoanCalculator
             Label.FontSize = 25;
             Label2.FontSize = 16;
             Label.VerticalTextAlignment = TextAlignment.Center;
-            Label2.VerticalTextAlignment = TextAlignment.Center;
-            Label.HorizontalTextAlignment = TextAlignment.Center;
+                Label.HorizontalTextAlignment = TextAlignment.Center;
             Label2.HorizontalTextAlignment = TextAlignment.Center;
-            Label.TextColor = Color.FromRgb(237, 139, 28);
-            Label2.TextColor = Color.FromRgb(237, 139, 28);
+            Label.TextColor = Color.FromRgb(2,117,157);
+            Label2.TextColor = Color.FromRgb(210,87,39);
 
          
 

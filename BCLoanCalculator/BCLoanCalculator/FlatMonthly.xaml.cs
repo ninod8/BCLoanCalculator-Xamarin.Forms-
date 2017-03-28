@@ -67,7 +67,7 @@ namespace BCLoanCalculator
             #endregion
 
             public event PropertyChangedEventHandler PropertyChanged;
-            void OnPropertyChanged([CallerMemberName]string name = "")
+            void OnPropertyChanged([CallerMemberName] string name = "")
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
             }
@@ -90,7 +90,7 @@ namespace BCLoanCalculator
                 set
                 {
                     monthlyRate = value;
-                    AnnualRate = (Convert.ToDouble(monthlyRate) * 12).ToString();
+                    annualRate = Math.Round((Convert.ToDouble(monthlyRate) * 12), 3, MidpointRounding.AwayFromZero).ToString();
                     OnPropertyChanged(nameof(AnnualRate));
                     OnPropertyChanged();
                 }
@@ -102,7 +102,7 @@ namespace BCLoanCalculator
                 set
                 {
                     annualRate = value;
-                    MonthlyRate = (Convert.ToDouble(annualRate) / 12).ToString();
+                    monthlyRate = Math.Round((Convert.ToDouble(annualRate) / 12), 3, MidpointRounding.AwayFromZero).ToString();
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(MonthlyRate));
                 }
