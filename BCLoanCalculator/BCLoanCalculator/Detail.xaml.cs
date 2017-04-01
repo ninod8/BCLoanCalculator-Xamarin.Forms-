@@ -18,7 +18,9 @@ namespace BCLoanCalculator
 
             Label.Text = "ბიზნეს კრედიტი";
             Label2.Text = "___ფული, რომელიც გეხმარება___";
-            Label.FontSize = 25;
+            LabelFontFamily(Label);
+            LabelFontFamily(Label2);
+        Label.FontSize = 25;
             Label2.FontSize = 16;
             Label.VerticalTextAlignment = TextAlignment.Center;
                 Label.HorizontalTextAlignment = TextAlignment.Center;
@@ -28,6 +30,15 @@ namespace BCLoanCalculator
 
          
 
-        } 
+        }          public void LabelFontFamily(Label label)
+        {
+            label.FontFamily = Device.OnPlatform(
+                                                null,
+                                                 "bpg_nateli_mtavruli.ttf#bpg_nateli_mtavruli", // Android
+                                                  null
+                                                );
+            label.FontAttributes = FontAttributes.Bold;
+
+        }
     }
 }

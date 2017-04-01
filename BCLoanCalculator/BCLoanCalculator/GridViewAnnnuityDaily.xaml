@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BCLoanCalculator.GridViewAnnnuityDaily"
+             BindingContext="AnnuityDaily">
+  <!--<ContentPage.BindingContext>
+    <pages:AnnuityDaily/>
+  </ContentPage.BindingContext>-->
+  <ScrollView x:Name="br" Orientation="Both">
+    <RelativeLayout x:Name="RelativeLayout"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+      <ListView x:Name="listView" ItemSource="{Binding Items}">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <Grid>
+              <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding Principal}" />
+                <Label Text="{Biding Payment}" />
+              </StackLayout>
+            </Grid>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+  <!--<Grid x:Name="grid" >
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="30"/>
+      <ColumnDefinition Width="80"/>
+      <ColumnDefinition Width="110"/>
+      <ColumnDefinition Width="110"/>
+      <ColumnDefinition Width="80"/>
+      <ColumnDefinition Width="110"/>
+      <ColumnDefinition Width="110"/>
+    </Grid.ColumnDefinitions>
+    <Label Text="{Binding PaymentNumber}"  Grid.Column="0" />
+    <Label Text="{Binding Date}"  Grid.Column="1" />
+    <Label Text="{Binding Payment}"  Grid.Column="2" />
+    <Label Text="{Binding Principal}"  Grid.Column="3" />
+    <Label Text="{Binding Interest}"  Grid.Column="4" />
+    <Label Text="{Binding StartingBalance}"  Grid.Column="5"/>
+    <Label Text="{Binding EndingBalance}"  Grid.Column="6"/>
+ 
+  </Grid>-->
+    </RelativeLayout>
+    </ScrollView>
+</ContentPage>

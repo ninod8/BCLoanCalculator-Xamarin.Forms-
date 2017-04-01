@@ -7,19 +7,19 @@
 
   <ScrollView>
     <StackLayout Padding="10">
-      <Label x:Name ="MainLabel" Text = "ყოველდღიური ანუიტეტი" Font="Bold" Margin="15,5"/>
+      <Label x:Name ="MainLabel" Text = "ყოველდღიური ანუიტეტი" FontAttributes="Bold" Margin="15,5"/>
       
       <Label x:Name="LoanAmountLabel" Text="სესხის თანხა" FontSize="13" Font="Bold" Margin="15,5"/>
       <Entry  Keyboard="Numeric" x:Name="AnnuityDailyEntry" Text="{Binding LoanAmount}" BackgroundColor="White" Margin="15,5"/>
       
-      <Label x:Name="AnnuityDailyStartDateLabel" Text="სესხის გაცემის თარიღი" FontSize="13" Font="Bold" Margin="15,5"/>
+      <Label x:Name="AnnuityDailyStartDateLabel" Text="სესხის გაცემის თარიღი" FontSize="13" FontAttributes="Bold" Margin="15,5"/>
       <DatePicker x:Name="DP1" Date="{Binding StartDate}" Margin="15,5"/>
 
       <Label x:Name="AnnuityDailyEndDateLabel" Text="სესხის დაფარვის თარიღი" FontSize="13" Font="Bold" Margin="15,5"/>
       <DatePicker x:Name="DP2" Date="{Binding EndDate}" Margin="15,5" />
 
       <Label x:Name="AnnuityDailyTermLabel" Text="სესხის ვადა (დღე)" FontSize="13" Font="Bold" Margin="15,5"/>
-      <Entry Keyboard="Numeric" x:Name="TermsOfLoanEntry" BackgroundColor="White" Text="{Binding TermsOfLoan}" Margin="15,5"/>
+      <Entry Keyboard="Numeric" x:Name="TermsOfLoanEntry" BackgroundColor="White" BindingContext="{Binding GridViewAnnnuityDaily}" Text="{Binding TermsOfLoan}" Margin="15,5"/>
       
       <Label x:Name="AnnuityDailyDailyRateLabel" Text="ყოველდღიური საპროცენტო განაკვეთი (%)" Font="Bold" FontSize="13" Margin="15,5"/>
       <Entry Keyboard="Numeric"  x:Name="DailyRateEntry" Text="{Binding DailyRate, Mode=TwoWay}" BackgroundColor="White" Margin="15,5"/>

@@ -20,7 +20,7 @@ namespace BCLoanCalculator
             };
             FDailyButton.Clicked += async (sender, e) =>
             {
-                await App.NavigateMasterDetail(new FlatDaily() { Title = "  სესხის კალკულატორი" });
+                await App.NavigateMasterDetail(new GridViewAnnnuityDaily() { Title = "  სესხის კალკულატორი" });
             };
             ELMonthlyButton.Clicked += async (sender, e) =>
             {

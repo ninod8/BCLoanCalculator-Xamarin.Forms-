@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Windows.ApplicationModel.DataTransfer;
+using UIKit;
 
 namespace BCLoanCalculator
 {
@@ -17,13 +18,29 @@ namespace BCLoanCalculator
         {
 
             InitializeComponent();
+            //var ld = this.BindingContext as AnnuityDailyCalc;
+            //    AnnualRateEntry.Text = ld.AnnualRate;
             BindingContext = new AnnuityDailyCalc();
+            //UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes()
+            //{
+            //    Font = UIFont.FromName("HelveticaNeue-Light", 20),
+            //   // TextColor = App.NavBarTextTint.ToUIColor()
+            //});
             //  var data = data as AnnuityDailyCalc;
             #region Interface
             DP1.Date = DateTime.Today.Date;
             DP2.Date = DateTime.Today.Date;
             MainLabel.TextColor = Color.FromRgb(2, 117, 157);
             MainLabel.FontSize = 17;
+            LabelFontFamily(MainLabel);
+            LabelFontFamily(AnnuityDailyAnnualRateLabel);
+            LabelFontFamily(AnnuityDailyDailyRateLabel);
+            LabelFontFamily(AnnuityDailyEndDateLabel);
+            LabelFontFamily(AnnuityDailyInterestOnlyLabel);
+            LabelFontFamily(AnnuityDailyPaymentLabel);
+            LabelFontFamily(AnnuityDailyStartDateLabel);
+            LabelFontFamily(AnnuityDailyTermLabel);
+            LabelFontFamily(LoanAmountLabel);
             MainLabel.HorizontalTextAlignment = TextAlignment.Center;
             AnnuityDailyAnnualRateLabel.VerticalTextAlignment = TextAlignment.Center;
             AnnuityDailyAnnualRateLabel.TextColor = Color.FromRgb(2, 117, 157);
@@ -53,9 +70,9 @@ namespace BCLoanCalculator
                 {
                     try
                     {
-                         DailyRateEntry.Text = "";
+                        DailyRateEntry.Text = "";
                         //double j = ;
-                        string g = Math.Round((Convert.ToDouble(AnnualRateEntry.Text) / 365), 2, MidpointRounding.AwayFromZero).ToString("N", CultureInfo.InvariantCulture);
+                        string g = Math.Round((Convert.ToDouble(AnnualRateEntry.Text) / 365), 3, MidpointRounding.AwayFromZero).ToString("N", CultureInfo.InvariantCulture);
                         DailyRateEntry.Placeholder = g + "%";
                     }
                     catch (Exception)
@@ -69,17 +86,27 @@ namespace BCLoanCalculator
                   try
                   {
                       AnnualRateEntry.Text = "";
-                      string g = Math.Round((Convert.ToDouble(DailyRateEntry.Text) * 365), 2, MidpointRounding.AwayFromZero).ToString("N", CultureInfo.InvariantCulture);
+                      string g = Math.Round((Convert.ToDouble(DailyRateEntry.Text) * 365), 3, MidpointRounding.AwayFromZero).ToString("N", CultureInfo.InvariantCulture);
                       AnnualRateEntry.Placeholder = g + "%";
                   }
                   catch (Exception)
                   {
 
                   }
-                  
+
               };
             // AnnuityDailyEntry.Placeholder=
             #endregion
+        }
+        public void LabelFontFamily(Label label)
+        {
+            label.FontFamily = Device.OnPlatform(
+                                                null,
+                                                 "bpg_nateli_mtavruli.ttf#bpg_nateli_mtavruli", // Android
+                                                  null
+                                                );
+            label.FontAttributes = FontAttributes.Bold;
+
         }
 
     }
