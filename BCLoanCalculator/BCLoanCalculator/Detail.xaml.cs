@@ -15,7 +15,7 @@ namespace BCLoanCalculator
             InitializeComponent();
             bc.WidthRequest = 150;
             bc.HeightRequest = 150;
-
+            
             Label.Text = "ბიზნეს კრედიტი";
             Label2.Text = "___ფული, რომელიც გეხმარება___";
             LabelFontFamily(Label);
@@ -34,10 +34,10 @@ namespace BCLoanCalculator
         {
             label.FontFamily = Device.OnPlatform(
                                                 null,
-                                                 "bpg_nateli_mtavruli.ttf#bpg_nateli_mtavruli", // Android
+                                                 "spparliamentmt_bold.ttf#spparliamentmt_bold", // Android
                                                   null
                                                 );
-            label.FontAttributes = FontAttributes.Bold;
+        //    label.FontAttributes = FontAttributes.Bold;
 
         }
     }

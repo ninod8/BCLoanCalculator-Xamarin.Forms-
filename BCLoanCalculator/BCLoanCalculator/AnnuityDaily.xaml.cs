@@ -102,10 +102,10 @@ namespace BCLoanCalculator
         {
             label.FontFamily = Device.OnPlatform(
                                                 null,
-                                                 "bpg_nateli_mtavruli.ttf#bpg_nateli_mtavruli", // Android
+                                                 "spparliamentmt_bold.ttf#spparliamentmt_bold", // Android
                                                   null
                                                 );
-            label.FontAttributes = FontAttributes.Bold;
+            //label.FontAttributes = FontAttributes.Bold;
 
         }
 

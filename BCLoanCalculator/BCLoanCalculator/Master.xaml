@@ -2,12 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BCLoanCalculator.Master"
-             Title="Detail"
+            Title="h"
              BackgroundColor="#FD25727"
              Icon="bc.svg" 
+             
              >
   <StackLayout Padding="20,70">
-    <Button x:Name="ELDailyButton" HeightRequest = "70"  Text="ყოველდღიური ანუიტეტი" FontSize="14" Margin="10,50,10,10" BorderWidth="0" BackgroundColor="#00698F" Font="Bold" TextColor="#FFFFFF"/>
+    <Button x:Name="ELDailyButton" HeightRequest = "70"  Text="ყოველდღიური ანუიტეტი" FontSize="14" Margin="10,50,10,10"  BorderWidth="0" BackgroundColor="#00698F" Font="Bold" TextColor="#FFFFFF"/>
     <Button x:Name="FDailyButton" HeightRequest = "70" Text="ყოველდღიური ბრტყელი პროცენტი" FontSize="14" Margin="10"  BackgroundColor="#00698F" Font="Bold" TextColor="#FFFFFF"/>
     <Button x:Name="ELMonthlyButton" HeightRequest = "70" Text="ყოველთვიური ანუიტეტი" FontSize="14" Margin="10" BorderWidth="0" Font="Bold" BackgroundColor="#00698F" TextColor="#FFFFFF"/>
     <Button x:Name="FMonthlyButton" HeightRequest = "70" Text="ყოველთვიური ბრტყელი პროცენტი" FontSize="14" Margin="10" Font="Bold" BorderWidth="0" BackgroundColor="#00698F" TextColor="#FFFFFF" />

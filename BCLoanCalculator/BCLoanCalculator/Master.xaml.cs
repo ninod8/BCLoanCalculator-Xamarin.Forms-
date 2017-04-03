@@ -13,23 +13,38 @@ namespace BCLoanCalculator
         public Master()
         {
             InitializeComponent();
+            LabelFontFamily(ELMonthlyButton);
+            LabelFontFamily(ELDailyButton);
+            LabelFontFamily(FDailyButton);
+            LabelFontFamily(FMonthlyButton);
             ELDailyButton.Clicked += async (sender, e) =>
             {
-                await App.NavigateMasterDetail(new AnnuityDaily() { Title = "  სესხის კალკულატორი" });
-
+                await App.NavigateMasterDetail(new AnnuityDaily() );
+                
             };
             FDailyButton.Clicked += async (sender, e) =>
             {
-                await App.NavigateMasterDetail(new GridViewAnnnuityDaily() { Title = "  სესხის კალკულატორი" });
+                await App.NavigateMasterDetail(new GridViewAnnnuityDaily() );
             };
             ELMonthlyButton.Clicked += async (sender, e) =>
             {
-                await App.NavigateMasterDetail(new AnnuityMonthly() { Title = "  სესხის კალკულატორი" });
+                await App.NavigateMasterDetail(new AnnuityMonthly());
             };
             FMonthlyButton.Clicked += async (sender, e) =>
             {
-                await App.NavigateMasterDetail(new FlatMonthly() { Title = "  სესხის კალკულატორი" });
+                await App.NavigateMasterDetail(new FlatMonthly());
             };
+      
+    }
+        public void LabelFontFamily(Button label)
+        {
+            label.FontFamily = Device.OnPlatform(
+                                                null,
+                                                 "spparliamentmt_bold.ttf#spparliamentmt_bold", // Android
+                                                  null
+                                                );
+          //  label.FontAttributes = FontAttributes.Bold;
+
         }
     }
 }
