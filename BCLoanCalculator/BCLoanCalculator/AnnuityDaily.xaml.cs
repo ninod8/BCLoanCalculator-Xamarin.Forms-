@@ -16,17 +16,10 @@ namespace BCLoanCalculator
     {
         public AnnuityDaily()
         {
-
             InitializeComponent();
-            //var ld = this.BindingContext as AnnuityDailyCalc;
-            //    AnnualRateEntry.Text = ld.AnnualRate;
+            var ld = this.BindingContext as AnnuityDailyCalc;
+
             BindingContext = new AnnuityDailyCalc();
-            //UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes()
-            //{
-            //    Font = UIFont.FromName("HelveticaNeue-Light", 20),
-            //   // TextColor = App.NavBarTextTint.ToUIColor()
-            //});
-            //  var data = data as AnnuityDailyCalc;
             #region Interface
             DP1.Date = DateTime.Today.Date;
             DP2.Date = DateTime.Today.Date;
@@ -66,6 +59,15 @@ namespace BCLoanCalculator
             AnnuityDailyTermLabel.VerticalTextAlignment = TextAlignment.Center;
             AnnuityDailyTermLabel.TextColor = Color.FromRgb(2, 117, 157);
             AnnuityDailyTermLabel.FontSize = 14;
+            Btn.BackgroundColor = Color.FromRgb(2, 117, 157);
+            Btn.TextColor = Color.White;
+            Btn.FontFamily = Device.OnPlatform(
+                                                null,
+                                                 "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
+                                                  null
+                                                );
+            #endregion
+
             AnnualRateEntry.TextChanged += (object sender, TextChangedEventArgs e) =>
                 {
                     try
@@ -81,6 +83,10 @@ namespace BCLoanCalculator
                     }
 
                 };
+            Btn.Clicked += async (sender, e) =>
+            {
+                await App.NavigateMasterDetail(new GridViewAnnnuityDaily());
+            };
             DailyRateEntry.TextChanged += (object sender, TextChangedEventArgs e) =>
               {
                   try
@@ -96,17 +102,14 @@ namespace BCLoanCalculator
 
               };
             // AnnuityDailyEntry.Placeholder=
-            #endregion
         }
         public void LabelFontFamily(Label label)
         {
             label.FontFamily = Device.OnPlatform(
                                                 null,
-                                                 "spparliamentmt_bold.ttf#spparliamentmt_bold", // Android
+                                                 "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
                                                   null
                                                 );
-            //label.FontAttributes = FontAttributes.Bold;
-
         }
 
     }
@@ -419,5 +422,6 @@ namespace BCLoanCalculator
             }
 
         }
+
     }
 }

@@ -125,8 +125,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\bpg_nateli_mtavruli.ttf" />
-    <AndroidAsset Include="Assets\spparliamentmt_bold.ttf" />
+    <AndroidAsset Include="Assets\bpg_nino_mtavruli_bold.ttf" />
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />

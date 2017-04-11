@@ -20,7 +20,15 @@ namespace BCLoanCalculator
             DP0.Date = DateTime.Today.Date;
             DP1.Date = DateTime.Today.Date;
             DP2.Date = DateTime.Today.Date;
-
+            LabelFontFamily(MainLabel);
+            LabelFontFamily(FlatMonthlyAnnualRateLabel);
+            LabelFontFamily(FlatMonthlyEndDateLabel);
+            LabelFontFamily(FlatMonthlyFirstPaymentLabel);
+            LabelFontFamily(FlatMonthlyLoanAmountLabel);
+            LabelFontFamily(FlatMonthlyPaymentLabel);
+            LabelFontFamily(FlatMonthlyRateLabel);
+            LabelFontFamily(FlatMonthlyStartDateLabel);
+            LabelFontFamily(FlatMonthlyTermLabel);
             MainLabel.VerticalTextAlignment = TextAlignment.Center;
             MainLabel.TextColor = Color.FromRgb(2, 117, 157);
             MainLabel.FontSize = 17;
@@ -50,6 +58,17 @@ namespace BCLoanCalculator
             FlatMonthlyTermLabel.TextColor = Color.FromRgb(2, 117, 157);
             FlatMonthlyTermLabel.FontSize = 14;
             #endregion
+            Btn.TextColor = Color.White;
+            Btn.BackgroundColor = Color.FromRgb(2, 117, 157);
+            Btn.FontFamily = Device.OnPlatform(
+                                                null,
+                                                 "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
+                                                  null
+                                                );
+            Btn.Clicked += async (sender, e) =>
+            {
+                await App.NavigateMasterDetail(new GridViewFlatMonthly());
+            };
         }
         public class FlatRateMonthlyCalc : INotifyPropertyChanged
         {
@@ -132,6 +151,14 @@ namespace BCLoanCalculator
                 set { firstPaymentDate = value; }
             }
 
+        }
+        public void LabelFontFamily(Label label)
+        {
+            label.FontFamily = Device.OnPlatform(
+                                                null,
+                                                 "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
+                                                  null
+                                                );
         }
     }
 }

@@ -2,43 +2,41 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BCLoanCalculator.GridViewAnnnuityDaily"
-             BindingContext="AnnuityDaily">
+             BindingContext="AnnuityDailyCalc">
+  
   <!--<ContentPage.BindingContext>
     <pages:AnnuityDaily/>
   </ContentPage.BindingContext>-->
-  <ScrollView x:Name="br" Orientation="Both">
-    <RelativeLayout x:Name="RelativeLayout"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-      <ListView x:Name="listView" ItemSource="{Binding Items}">
+
+  <!--<ListView x:Name="listView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
         <ListView.ItemTemplate>
           <DataTemplate>
-            <Grid>
-              <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding Principal}" />
-                <Label Text="{Biding Payment}" />
-              </StackLayout>
-            </Grid>
+            <ViewCell>
+          
+            </ViewCell>
           </DataTemplate>
+          
         </ListView.ItemTemplate>
-      </ListView>
-  <!--<Grid x:Name="grid" >
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="30"/>
-      <ColumnDefinition Width="80"/>
-      <ColumnDefinition Width="110"/>
-      <ColumnDefinition Width="110"/>
-      <ColumnDefinition Width="80"/>
-      <ColumnDefinition Width="110"/>
-      <ColumnDefinition Width="110"/>
-    </Grid.ColumnDefinitions>
-    <Label Text="{Binding PaymentNumber}"  Grid.Column="0" />
-    <Label Text="{Binding Date}"  Grid.Column="1" />
-    <Label Text="{Binding Payment}"  Grid.Column="2" />
-    <Label Text="{Binding Principal}"  Grid.Column="3" />
-    <Label Text="{Binding Interest}"  Grid.Column="4" />
-    <Label Text="{Binding StartingBalance}"  Grid.Column="5"/>
-    <Label Text="{Binding EndingBalance}"  Grid.Column="6"/>
- 
-  </Grid>-->
-    </RelativeLayout>
-    </ScrollView>
+      </ListView>-->
+  <ScrollView Orientation="Both">
+    <Grid x:Name="grid" Margin="10,5,2,2">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="30"   />
+        <ColumnDefinition Width="80"  />
+        <ColumnDefinition Width="120" />
+        <ColumnDefinition Width="90" />
+        <ColumnDefinition Width="70"  />
+        <ColumnDefinition Width="80" />
+        <ColumnDefinition Width="130" />
+      </Grid.ColumnDefinitions>
+      <Label Margin="0,0,2,2" x:Name="PmtNumberLabel"        Grid.Column="0"/>
+      <Label Margin="0,5,2,2" x:Name="DateLabel"             Grid.Column="1"/>
+      <Label Margin="0,5,2,2" x:Name="StartingBalanceLabel"   Grid.Column="2"/>
+      <Label Margin="0,5,2,2" x:Name="PaymentLabel"          Grid.Column="3"/>
+      <Label Margin="0,5,2,2" x:Name="PrincipalLabel"        Grid.Column="4"/>
+      <Label Margin="0,5,2,2" x:Name="RateLabel"            Grid.Column="5"/>
+      <Label Margin="0,5,2,2" x:Name="EndingBalanceLabel"    Grid.Column="6"/>
+    </Grid>
+  </ScrollView>
+
 </ContentPage>

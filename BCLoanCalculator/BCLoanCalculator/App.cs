@@ -12,7 +12,7 @@ namespace BCLoanCalculator
     {
         public static MasterDetailPage MasterDetail { get; set; }
 
-        public async static Task NavigateMasterDetail(Page page)
+        public async static Task NavigateMasterDetail(Page page, )
         {
             App.MasterDetail.IsPresented = false;
             await App.MasterDetail.Detail.Navigation.PushAsync(page);

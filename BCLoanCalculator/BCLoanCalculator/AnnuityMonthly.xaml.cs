@@ -20,6 +20,17 @@ namespace BCLoanCalculator
             DP0.Date = DateTime.Today.Date;
             DP1.Date = DateTime.Today.Date;
             DP2.Date = DateTime.Today.Date;
+            LabelFontFamily(LoanAmountLabel);
+            LabelFontFamily(MainLabel);
+            LabelFontFamily(AnnuityMonthlyTermLabel);
+            LabelFontFamily(AnnuityMonthlyAnnualRateLabel);
+            LabelFontFamily(AnnuityMonthlyEndDateLabel);
+            LabelFontFamily(AnnuityMonthlyFirstPaymentDateLabel);
+            LabelFontFamily(AnnuityMonthlyInterestOnlyLabel);
+            LabelFontFamily(AnnuityMonthlyMonthlyRateLabel);
+            LabelFontFamily(AnnuityMonthlyPaymentLabel);
+            LabelFontFamily(AnnuityMonthlyStartDateLabel);
+
             MainLabel.VerticalTextAlignment = TextAlignment.Center;
             MainLabel.HorizontalTextAlignment = TextAlignment.Center;
             MainLabel.TextColor = Color.FromRgb(2, 117, 157);
@@ -52,6 +63,19 @@ namespace BCLoanCalculator
             AnnuityMonthlyTermLabel.TextColor = Color.FromRgb(2, 117, 157);
             AnnuityMonthlyTermLabel.FontSize = 14;
             #endregion
+            Btn.Clicked += async (sender, e) =>
+            {
+                await App.NavigateMasterDetail(new GridViewAnnuityMonthly());
+            };
+            Btn.TextColor = Color.White;
+            Btn.BackgroundColor = Color.FromRgb(2, 117, 157);
+
+            Btn.FontFamily = Device.OnPlatform(
+                                                null,
+                                                 "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
+                                                  null
+                                                );
+
         }
         public class AnnuityMonthlyCalc:INotifyPropertyChanged
         {
@@ -91,7 +115,7 @@ namespace BCLoanCalculator
                 set
                 {
                     monthlyRate = value;
-                    annualRate = Math.Round((Convert.ToDouble(monthlyRate) * 12),3,MidpointRounding.AwayFromZero).ToString();
+                   // annualRate = Math.Round((Convert.ToDouble(monthlyRate) * 12),3,MidpointRounding.AwayFromZero).ToString();
                     OnPropertyChanged(nameof(AnnualRate));
                     OnPropertyChanged();
                 }
@@ -103,7 +127,7 @@ namespace BCLoanCalculator
                 set
                 {
                     annualRate = value;
-                    monthlyRate = Math.Round((Convert.ToDouble(annualRate) / 12),3,MidpointRounding.AwayFromZero).ToString();
+                  //  monthlyRate = Math.Round((Convert.ToDouble(annualRate) / 12),3,MidpointRounding.AwayFromZero).ToString();
                     OnPropertyChanged(nameof(monthlyRate));
                     OnPropertyChanged();
                 }
@@ -139,6 +163,14 @@ namespace BCLoanCalculator
                 set { interestOnly = value; }
             }
 
+        }
+        public void LabelFontFamily(Label label)
+        {
+            label.FontFamily = Device.OnPlatform(
+                                                null,
+                                                 "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
+                                                  null
+                                                );
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UIKit;
 using Windows.UI.Xaml.Documents;
 using Xamarin.Forms;
 
@@ -12,6 +13,7 @@ namespace BCLoanCalculator
     {
         public Detail()
         {
+         
             InitializeComponent();
             bc.WidthRequest = 150;
             bc.HeightRequest = 150;
@@ -34,11 +36,12 @@ namespace BCLoanCalculator
         {
             label.FontFamily = Device.OnPlatform(
                                                 null,
-                                                 "spparliamentmt_bold.ttf#spparliamentmt_bold", // Android
+                                                 "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
                                                   null
                                                 );
         //    label.FontAttributes = FontAttributes.Bold;
 
         }
+        
     }
 }

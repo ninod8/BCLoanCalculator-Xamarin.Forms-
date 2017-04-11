@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BCLoanCalculator.GridViewAnnuityMonthly">
+  <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+  <ScrollView Orientation="Both">
+    <Grid x:Name="grid" >
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="30" />
+        <ColumnDefinition Width="80" />
+        <ColumnDefinition Width="120"/>
+        <ColumnDefinition Width="110"/>
+        <ColumnDefinition Width="80" />
+        <ColumnDefinition Width="110"/>
+        <ColumnDefinition Width="130"/>
+      </Grid.ColumnDefinitions>
+      <Label Margin="0,0,2,2"  x:Name="PmtNumberLabel"        Grid.Column="0"/>
+      <Label Margin="0,5,2,2"  x:Name="DateLabel"             Grid.Column="1"/>
+      <Label Margin="0,5,2,2"  x:Name="StartingBalanceLabel" Grid.Column="2"/>
+      <Label Margin="0,5,2,2"  x:Name="PaymentLabel"          Grid.Column="3"/>
+      <Label Margin="0,5,2,2"  x:Name="PrincipalLabel"        Grid.Column="4"/>
+      <Label Margin="0,5,2,2"  x:Name="RateLabel"            Grid.Column="5"/>
+      <Label Margin="0,5,2,2"  x:Name="EndingBalanceLabel"    Grid.Column="6"/>
+    </Grid>
+  </ScrollView>
+</ContentPage>

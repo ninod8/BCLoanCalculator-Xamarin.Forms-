@@ -17,6 +17,14 @@ namespace BCLoanCalculator
             InitializeComponent();
             BindingContext = new FlatRateDailyCalc();
             #region Interface
+            LabelFontFamily(MainLabel);
+            LabelFontFamily(FlatDailyAnnualRateLabel);
+            LabelFontFamily(FlatDailyEndDateLabel);
+            LabelFontFamily(FlatDailyPaymentLabel);
+            LabelFontFamily(FlatDailyRateLabel);
+            LabelFontFamily(FlatDailyStartDateLabel);
+            LabelFontFamily(FlatDailyTermLabel);
+        //    LabelFontFamily();
             DP1.Date = DateTime.Today.Date;
             DP2.Date = DateTime.Today.Date;
             MainLabel.VerticalTextAlignment = TextAlignment.Center;
@@ -45,6 +53,18 @@ namespace BCLoanCalculator
             FlatDailyTermLabel.TextColor = Color.FromRgb(2, 117, 157);
             FlatDailyTermLabel.FontSize = 14;
             #endregion
+            Btn.Clicked += async (sender, e) =>
+            {
+                await App.NavigateMasterDetail(new GridViewFlatDaily());
+            };
+            Btn.TextColor = Color.White;
+            Btn.FontFamily = Device.OnPlatform(
+                                                null,
+                                                 "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
+                                                  null
+                                                );
+            Btn.BackgroundColor = Color.FromRgb(2, 117, 157);
+
         }
         public class FlatRateDailyCalc : INotifyPropertyChanged
         {
@@ -132,6 +152,14 @@ namespace BCLoanCalculator
                 get { return endDate; }
                 set { endDate = value; }
             }
+        }
+        public void LabelFontFamily(Label label)
+        {
+            label.FontFamily = Device.OnPlatform(
+                                                null,
+                                                 "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
+                                                  null
+                                                );
         }
     }
 }

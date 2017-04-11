@@ -1,35 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Xamarin.Forms;
 
 namespace BCLoanCalculator
 {
-    public partial class GridViewAnnnuityDaily : ContentPage
+    public partial class GridViewAnnuityMonthly : ContentPage
     {
-        public GridViewAnnnuityDaily()
+        public GridViewAnnuityMonthly()
         {
-            // BindingContext = new AnnuityDailyCalc();
-
             InitializeComponent();
-
-            var ld = BindingContext as AnnuityDailyCalc;
-            //  GraphDaily();
             PmtNumberLabel.Text = "№";
-            //  DateLabel.Text = "თარიღი";
-            DateLabel.Text = ld.LoanAmount; //////////////<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  აქ რატომ არაფერს აბრუნებს? ოვერრაიდი ვერ ვიპოვე ნავიგაციაზე და მვვმ-ს მივაწვე? 
+            DateLabel.Text = "თარიღი";
             StartingBalanceLabel.Text = "საწყისი ბალანსი";
             EndingBalanceLabel.Text = "საბოლოო ბალანსი";
             PaymentLabel.Text = "გადასახადი";
             PrincipalLabel.Text = "ძირი";
             RateLabel.Text = "პროცენტი";
 
-            //int x = 1;
-            //gridItem(x, "27/02/1997", "1000", "36", "35", "1", "963");
-            //x++;
+
+            int x = 1;
+            gridItem(x, "27/02/1997", "1000", "36", "35", "1", "963");
+            x++;
 
             LabelFontFamily(PaymentLabel);
             LabelFontFamily(DateLabel);
@@ -42,7 +37,7 @@ namespace BCLoanCalculator
 
         public void gridItem(int n, string date, string startingBalance, string payment, string principal, string rate, string endingBalance)
         {
-            var ld = this.BindingContext as AnnuityDailyCalc;
+
             grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Auto) });
             var paymentNLabel = new Label { Text = n.ToString() };
             var dateLabel = new Label { Text = date };
@@ -58,6 +53,8 @@ namespace BCLoanCalculator
             grid.Children.Add(principalLabel, 4, n);
             grid.Children.Add(rateLabel, 5, n);
             grid.Children.Add(endingBalanceLabel, 6, n);
+
+
         }
         public void LabelFontFamily(Label label)
         {

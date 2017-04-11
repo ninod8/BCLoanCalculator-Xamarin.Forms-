@@ -55,6 +55,15 @@
     <Compile Include="GridViewAnnnuityDaily.xaml.cs">
       <DependentUpon>GridViewAnnnuityDaily.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GridViewAnnuityMonthly.xaml.cs">
+      <DependentUpon>GridViewAnnuityMonthly.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GridViewFlatDaily.xaml.cs">
+      <DependentUpon>GridViewFlatDaily.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GridViewFlatMonthly.xaml.cs">
+      <DependentUpon>GridViewFlatMonthly.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -133,6 +142,24 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GridViewAnnnuityDaily.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GridViewAnnuityMonthly.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GridViewFlatMonthly.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GridViewFlatDaily.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
