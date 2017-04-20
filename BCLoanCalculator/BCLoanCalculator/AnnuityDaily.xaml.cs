@@ -10,7 +10,8 @@ using System.Runtime.CompilerServices;
 using Windows.ApplicationModel.DataTransfer;
 using UIKit;
 using Microsoft.VisualBasic;
-
+using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace BCLoanCalculator
 {
@@ -22,7 +23,7 @@ namespace BCLoanCalculator
         {
             InitializeComponent();
             this.BindingContext = LD;
-
+ 
             BindingContext = new AnnuityDailyCalc();
             LD = BindingContext as AnnuityDailyCalc;
             ToolbarItems.Add(new ToolbarItem("X", "X",  () =>
@@ -81,6 +82,21 @@ namespace BCLoanCalculator
             AnnuityDailyTermLabel.FontSize = 14;
             Btn.BackgroundColor = Color.FromRgb(2, 117, 157);
             Btn.TextColor = Color.White;
+            PaymentEntry.FontFamily = Device.OnPlatform(
+                                                null,
+                                                 "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
+                                                  null
+                                                );
+            Label1.FontFamily = Device.OnPlatform(
+                                       null,
+                                        "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
+                                         null
+                                       );
+            Label2.FontFamily = Device.OnPlatform(
+                                       null,
+                                        "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
+                                         null
+                                       );
             Btn.FontFamily = Device.OnPlatform(
                                                 null,
                                                  "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
@@ -99,7 +115,7 @@ namespace BCLoanCalculator
                       // App.data =  AnnualRateEntry.Text;
                       
                     }
-                    catch (Exception)
+                    catch (System.Exception)
                     {
 
 
@@ -126,6 +142,20 @@ namespace BCLoanCalculator
                   }
 
               };
+            PaymentEntry.TextChanged += (object sender, TextChangedEventArgs e) =>
+              {
+                  try
+                  {
+                      double paymentSum = Convert.ToDouble(App.PmtAD) * Convert.ToDouble(App.TermAD);
+                      double rateSum = paymentSum - Convert.ToDouble(App.LoanAmountAD);
+                      Label1.Text = "გადახდების ჯამი: "+ paymentSum.ToString("N", CultureInfo.InvariantCulture);
+                      Label2.Text = "პროცენტის ჯამი: "+ rateSum.ToString("N", CultureInfo.InvariantCulture);
+                 //     Label3.Text="ეფექტური პროცენტი: "+ 
+                  }
+                  catch (Exception)
+                  {
+                  }
+              };
             // AnnuityDailyEntry.Placeholder=
         }
         public void LabelFontFamily(Label label)
@@ -149,8 +179,6 @@ namespace BCLoanCalculator
         private DateTime startDate=App.StartDateAD;
         private DateTime endDate=App.EndDateAD;
         private string interestOnly=App.InterestOnlyAD;
-
-
 
         #endregion
         public event PropertyChangedEventHandler PropertyChanged;
@@ -186,7 +214,6 @@ namespace BCLoanCalculator
                 }
                 catch (Exception)
                 {
-                    loanAmount = "";
                 }
 
             }
@@ -220,7 +247,6 @@ namespace BCLoanCalculator
                 }
                 catch (Exception)
                 {
-                    endDate = DateTime.Today;
                 }
             }
         }
@@ -247,7 +273,7 @@ namespace BCLoanCalculator
                 }
                 catch (Exception)
                 {
-                    dailyRate = "";
+                 
                 }
             }
         }
@@ -275,7 +301,7 @@ namespace BCLoanCalculator
                 }
                 catch (Exception)
                 {
-                    annualRate = "";
+
                 }
             }
         }
@@ -287,7 +313,8 @@ namespace BCLoanCalculator
             set
             {
                 payment = value;
-                App.PaymentAD = value;
+                
+               // App.PaymentAD = PMT();
                 try
                 {
                     //if (Convert.ToDouble(payment) > 0)
@@ -298,7 +325,6 @@ namespace BCLoanCalculator
                 }
                 catch (Exception)
                 {
-                    termsOfLoan = "";
                 }
             }
         }
@@ -319,7 +345,7 @@ namespace BCLoanCalculator
                     //     termsOfLoan = NperDaily();
                     // }
                     //else
-                    payment = PMT();
+                  //  payment = PMT();
                     OnPropertyChanged(nameof(LoanAmount));
                     OnPropertyChanged(nameof(DailyRate));
                     OnPropertyChanged(nameof(AnnualRate));
@@ -331,7 +357,6 @@ namespace BCLoanCalculator
                 }
                 catch (Exception)
                 {
-                    termsOfLoan = "";
                 }
             }
         }
@@ -351,7 +376,7 @@ namespace BCLoanCalculator
                     //    termsOfLoan = NperDaily();
                     //}
                     //else 
-                    payment = PMT();
+                 //   payment = PMT();
 
                     OnPropertyChanged(nameof(LoanAmount));
                     OnPropertyChanged(nameof(DailyRate));
@@ -364,7 +389,6 @@ namespace BCLoanCalculator
                 }
                 catch (Exception)
                 {
-                    termsOfLoan = "";
                 }
             }
         }
@@ -397,7 +421,6 @@ namespace BCLoanCalculator
                 catch (Exception)
                 {
 
-                    interestOnly = "";
                 }
 
             }
@@ -407,7 +430,7 @@ namespace BCLoanCalculator
         {
 
             int days = (endDate - startDate).Days;
-            if (days == 0) return "";
+           // if (days == 0) return "";
             return days.ToString();
 
         }
@@ -416,7 +439,8 @@ namespace BCLoanCalculator
         {
             try
             {
-                int interestonly;
+               
+                double interestonly;
                 if (String.IsNullOrEmpty(InterestOnly))
                 {
                     interestonly = 0;
@@ -424,18 +448,21 @@ namespace BCLoanCalculator
                 else interestonly = Convert.ToInt32(InterestOnly);
                 double rate = Convert.ToDouble(DailyRate) / 100;
                 double pmt = Convert.ToDouble(LoanAmount) * Convert.ToDouble(rate) / (1 - (1 / (Math.Pow(Convert.ToDouble(rate + 1), Convert.ToDouble(TermsOfLoan) - interestonly))));
-
-                if (!Double.IsNaN(pmt) && !Double.IsInfinity(pmt) && pmt != 0)
+                //  double nper = Convert.ToDouble(TermsOfLoan) - interestonly;
+                //   double payment=  Financial.Pmt(rate, nper, Convert.ToDouble(LoanAmount), 0, DueDate.EndOfPeriod);
+                if (!Double.IsNaN(pmt) && !Double.IsInfinity(pmt) && pmt > 0)
                 {
-                    return Math.Round(pmt, 2, MidpointRounding.AwayFromZero).ToString("N", CultureInfo.InvariantCulture);
+                    string val= Math.Round(pmt, 2, MidpointRounding.AwayFromZero).ToString("N", CultureInfo.InvariantCulture);
+                    App.PmtAD = val;
+                    return val;
+                  
                 }
                 else return "";
             }
             catch (Exception)
             {
-                return "";
+                return "სწორად შეავსეთ ველები";
             }
-
         }
 
         public string NperDaily()
@@ -451,8 +478,6 @@ namespace BCLoanCalculator
             {
                 return "";
             }
-
         }
-
     }
 }

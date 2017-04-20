@@ -70,165 +70,308 @@ namespace BCLoanCalculator
                                                 );
         }
         public void GraphDaily()
-        {            this.BindingContext = ld;
-            BindingContext = new AnnuityDailyCalc();
-            ld = BindingContext as AnnuityDailyCalc;
+        {
             try
             {
-                     double dailyInterest = Convert.ToDouble(ld.DailyRate) / 100;
+                // CultureInfo ci = new CultureInfo("en-US");
+                double sumI = 0;
+                double sumP = 0;
+                bool Toggle1 = true;
+                double amount = Convert.ToDouble(App.LoanAmountAD);
+                double balance = Convert.ToDouble(App.LoanAmountAD);
 
 
-                double amount = Convert.ToDouble(ld.LoanAmount);
-                double balance = Convert.ToDouble(ld.LoanAmount);
-
-                int term = Convert.ToInt32(ld.TermsOfLoan) - 1;
-                int j = 1;
-                gridItem(j, "27/02/1997", "1000", "36", "35", "1", "963");
-                j++;
+                double LoanAmount = Convert.ToDouble(App.LoanAmountAD);
+                int Term = Convert.ToInt32(App.TermAD);
+                DateTime StartDate = App.StartDateAD;
+                double AnnualRate = Convert.ToDouble(App.AnnualRateAD);
+                double DailyRate = Convert.ToDouble(App.DailyRateAD);
+                string InterestOnly = App.InterestOnlyAD;
+                double Payment = Convert.ToDouble(App.PaymentAD);
+                double PMT = Convert.ToDouble(App.PmtAD);
+                double dailyInterest = Convert.ToDouble(DailyRate) / 100;
+                int term = Term - 1;
+      
                 int interestonly;
-                if (String.IsNullOrEmpty(ld.InterestOnly))
+                if (String.IsNullOrEmpty(InterestOnly))
                 {
                     interestonly = 0;
                 }
+                else interestonly = Convert.ToInt32(InterestOnly);
 
-                else interestonly = Convert.ToInt32(ld.InterestOnly);
-
-                for (int i = 0; 
-                    i < Convert.ToInt32(ld.TermsOfLoan); i++)
+                for (int i = 0; i < Term; i++)
                 {
-                    ////////////// if ( == true)//////////////////////////////////////<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-                    ////  {
-                    if (Convert.ToDouble(ld.PMT()) < 0)
+                    if (Toggle1 == true)
                     {
-                        do
+                        if (PMT < Payment)
                         {
-                            if (Convert.ToDouble(interestonly) > 0)
-                            {
-                                while (i < Convert.ToDouble(interestonly))
-                                {
-                                    i++;
-                                    DateTime dateTime10 = ld.StartDate.AddDays(i);
-                                    double interest10 = amount * dailyInterest;
-                                    double principal10 = 0.00;
-                                    balance = Convert.ToDouble(ld.LoanAmount);
-                                    int x = 1;
-                                    gridItem(x, dateTime10.Date.ToString("dd/MM/yyyy"), amount.ToString(), ld.PMT(), interest10.ToString(), principal10.ToString(), balance.ToString());
-                                    x++;
-                                    amount = Convert.ToDouble(ld.LoanAmount);
-                                }
-                            }
-                            DateTime dateTime3 = ld.StartDate.AddDays(i + 1);
-                            double interest3 = amount * dailyInterest;
-                            double principal3 = Convert.ToDouble(ld.Payment) - Math.Round(interest3, 2, MidpointRounding.AwayFromZero);
-                            balance -= principal3;
-                            gridItem(i, dateTime3.Date.ToString("dd/MM/yyyy"), amount.ToString(), ld.PMT().ToString(), interest3.ToString(), principal3.ToString(), balance.ToString());
-                            amount -= principal3;
-                            i++;
-                            //sumI += Math.Round(interest3, 2, MidpointRounding.AwayFromZero);
-                            //sumP += Convert.ToDouble(ld.Payment);
-                        }
-                        while ((balance - Convert.ToDouble(ld.Payment)) > 0);
-                        DateTime dateTime1 = ld.StartDate.AddDays(i + 1);
-                        double interest1 = amount * dailyInterest;
-                        double principal1 = balance;
-                        balance -= principal1;
-                        gridItem(i, dateTime1.Date.ToString("dd/MM/yyyy"), amount.ToString(), ld.PMT().ToString(), interest1.ToString(), principal1.ToString(), balance.ToString());
-                        amount -= principal1;
-                        i = Convert.ToInt32(ld.TermsOfLoan);
-
-                    }
-                    else
-                    {
-                        if (Convert.ToDouble(ld.PMT()) > 0)
-                        {
-                            while (i < term)
+                            do
                             {
                                 if (Convert.ToDouble(interestonly) > 0)
                                 {
                                     while (i < Convert.ToDouble(interestonly))
                                     {
                                         i++;
-                                        DateTime dateTime12 = ld.StartDate.AddDays(i);
-                                        double interest12 = amount * dailyInterest;
-                                        double principal12 = 0.00;
-                                        balance = Convert.ToDouble(ld.LoanAmount);
-                                        gridItem(i, dateTime12.Date.ToString("dd/MM/yyyy"), amount.ToString(), ld.PMT().ToString(), interest12.ToString(), principal12.ToString(), balance.ToString());
-                                        amount = Convert.ToDouble(ld.LoanAmount);
+                                        DateTime dateTime10 = StartDate.AddDays(i);
+                                        double interest10 = amount * dailyInterest;
+                                        double principal10 = 0.00;
+                                        balance = LoanAmount;
+                                        //Items.Add(new GridItem()
+                                        //{
+                                        //    PaymentNumber = i.ToString(),
+                                        //    Date = dateTime10.Date.ToString("dd/MM/yyyy"),
+                                        //    Payment = Math.Round(interest10, 2, MidpointRounding.AwayFromZero).ToString(),
+                                        //    EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                                        //    Principal = Math.Rou  nd(principal10, 2, MidpointRounding.AwayFromZero).ToString(),
+                                        //    Interest = Math.Round(interest10, 2, MidpointRounding.AwayFromZero).ToString(),
+                                        //    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                                        //})
+                                        //;
+                                        gridItem(i, dateTime10.Date.ToString("dd/MM/yyyy"),
+                                            Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(), Math.Round(interest10, 2, MidpointRounding.AwayFromZero).ToString(),
+                                            Math.Round(principal10, 2, MidpointRounding.AwayFromZero).ToString(), Math.Round(interest10, 2, MidpointRounding.AwayFromZero).ToString(), 
+                                            Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString());
+                                        amount = LoanAmount;
+                                        sumI += Math.Round(interest10, 2, MidpointRounding.AwayFromZero);
+                                        sumP += Math.Round(interest10, 2, MidpointRounding.AwayFromZero);
                                     }
                                 }
-                                DateTime dateTime4 = ld.StartDate.AddDays(i + 1);
-                                double interest4 = amount * dailyInterest;
-                                double principal4 = Convert.ToDouble(ld.Payment) - Math.Round(interest4, 2, MidpointRounding.AwayFromZero);
-                                balance -= principal4;
-                                gridItem(i, dateTime4.Date.ToString("dd/MM/yyyy"), amount.ToString(), ld.PMT().ToString(), interest4.ToString(), principal4.ToString(), balance.ToString());
-                                amount -= principal4;
+                                DateTime dateTime = StartDate.AddDays(i + 1);
+                                double interest = amount * dailyInterest;
+                                double principal = Payment - Math.Round(interest, 2, MidpointRounding.AwayFromZero);
+                                balance -= principal;
+                                //Items.Add(new GridItem()
+                                //{
+                                //    PaymentNumber = (i + 1).ToString(),
+                                //    Date = dateTime.Date.ToString("dd/MM/yyyy"),
+                                //    Payment = Math.Round(Payment, 2, MidpointRounding.AwayFromZero).ToString(),
+                                //    EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                                //    Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
+                                //    Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
+                                //    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                                //});
+                                gridItem(i+1, dateTime.Date.ToString("dd/MM/yyyy"), Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    Math.Round(Payment, 2, MidpointRounding.AwayFromZero).ToString(), Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(), Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString());
+                                amount -= principal;
                                 i++;
-                                //sumP += Math.Round(Convert.ToDouble(ld.Payment), 2, MidpointRounding.AwayFromZero);
-                                //sumI += Math.Round(interest, 2, MidpointRounding.AwayFromZero);
+                                sumI += Math.Round(interest, 2, MidpointRounding.AwayFromZero);
+                                sumP += Payment;
                             }
-                            DateTime dateTime1 = ld.StartDate.AddDays(i + 1);
+                            while ((balance - Payment) > 0);
+                            DateTime dateTime1 = StartDate.AddDays(i + 1);
                             double interest1 = amount * dailyInterest;
-                            double principal1 = amount;
+                            double principal1 = balance;
                             balance -= principal1;
-                            gridItem(i, dateTime1.Date.ToString("dd/MM/yyyy"), amount.ToString(), ld.PMT().ToString(), interest1.ToString(), principal1.ToString(), balance.ToString());
+                            //Items.Add(new GridItem()
+                            //{
+                            //    PaymentNumber = (i + 1).ToString(),
+                            //    Date = dateTime1.Date.ToString("dd/MM/yyyy"),
+                            //    Payment = Math.Round((interest1 + amount), 2, MidpointRounding.AwayFromZero).ToString(),
+                            //    EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                            //    Principal = Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(),
+                            //    Interest = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                            //    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                            //});
+                            gridItem(i+1, dateTime1.Date.ToString("dd/MM/yyyy"), Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
+                               Math.Round((interest1 + amount), 2, MidpointRounding.AwayFromZero).ToString(), Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(), Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                               Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString());
                             amount -= principal1;
+                            sumP += Math.Round((interest1 + amount), 2, MidpointRounding.AwayFromZero);
+                            sumI += Math.Round(interest1, 2, MidpointRounding.AwayFromZero);
+                            i = Term;
                         }
                         else
                         {
-                            if (Convert.ToDouble(interestonly) > 0)
+                            if (PMT > Payment)
                             {
-                                while (i < Convert.ToDouble(interestonly))
+                                while (i < term)
                                 {
+                                    if (Convert.ToDouble(interestonly) > 0)
+                                    {
+                                        while (i < Convert.ToDouble(interestonly))
+                                        {
+                                            i++;
+                                            DateTime dateTime12 = StartDate.AddDays(i);
+                                            double interest12 = amount * dailyInterest;
+                                            double principal12 = 0.00;
+                                            balance = LoanAmount;
+                                            //Items.Add(new GridItem()
+                                            //{
+                                            //    PaymentNumber = i.ToString(),
+                                            //    Date = dateTime12.Date.ToString("dd/MM/yyyy"),
+                                            //    Payment = Math.Round(interest12, 2, MidpointRounding.AwayFromZero).ToString(),
+                                            //    EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                                            //    Principal = Math.Round(principal12, 2, MidpointRounding.AwayFromZero).ToString(),
+                                            //    Interest = Math.Round(interest12, 2, MidpointRounding.AwayFromZero).ToString(),
+                                            //    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                                            //});
+                                            gridItem(i, dateTime12.Date.ToString("dd/MM/yyyy"), Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
+                                                Math.Round(interest12, 2, MidpointRounding.AwayFromZero).ToString(), Math.Round(principal12, 2, MidpointRounding.AwayFromZero).ToString(),
+                                                Math.Round(interest12, 2, MidpointRounding.AwayFromZero).ToString(), Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString()
+                                                );
+                                            amount = LoanAmount;
+                                            sumI += Math.Round(interest12, 2, MidpointRounding.AwayFromZero);
+                                            sumP += Math.Round(interest12, 2, MidpointRounding.AwayFromZero);
+
+                                        }
+                                    }
+                                    DateTime dateTime = StartDate.AddDays(i + 1);
+                                    double interest = amount * dailyInterest;
+                                    double principal = Payment - Math.Round(interest, 2, MidpointRounding.AwayFromZero);
+                                    balance -= principal;
+                                    //Items.Add(new GridItem()
+                                    //{
+                                    //    PaymentNumber = (i + 1).ToString(),
+                                    //    Date = dateTime.Date.ToString("dd/MM/yyyy"),
+                                    //    Payment = Math.Round(Payment, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    //    EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    //    Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    //    Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    //    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                                    //});
+                                    gridItem(i+1, dateTime.Date.ToString("dd/MM/yyyy"), Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
+                                        Math.Round(Payment, 2, MidpointRounding.AwayFromZero).ToString(), Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
+                                        Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(), Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString());
+                                    amount -= principal;
                                     i++;
-                                    DateTime dateTime1 = ld.StartDate.AddDays(i);
-                                    double interest1 = amount * dailyInterest;
-                                    double principal1 = 0.00;
-                                    balance = Convert.ToDouble(ld.LoanAmount);
-                                    gridItem(i, dateTime1.Date.ToString("dd/MM/yyyy"), amount.ToString(), ld.PMT().ToString(), interest1.ToString(), principal1.ToString(), balance.ToString());
-                                    amount = Convert.ToDouble(ld.LoanAmount);
+                                    sumP += Math.Round(Payment, 2, MidpointRounding.AwayFromZero);
+                                    sumI += Math.Round(interest, 2, MidpointRounding.AwayFromZero);
                                 }
+                                DateTime dateTime1 = StartDate.AddDays(i + 1);
+                                double interest1 = amount * dailyInterest;
+                                double principal1 = amount;
+                                balance -= principal1;
+                                //Items.Add(new GridItem()
+                                //{
+                                //    PaymentNumber = (i + 1).ToString(),
+                                //    Date = dateTime1.Date.ToString("dd/MM/yyyy"),
+                                //    Payment = Math.Round(interest1 + amount, 2, MidpointRounding.AwayFromZero).ToString(),
+                                //    EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                                //    Principal = Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                //    Interest = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                //    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                                //});
+                                gridItem(i+1, dateTime1.Date.ToString("dd/MM/yyyy"), Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(), Math.Round(interest1 + amount, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(), Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                     Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString());
+                                amount -= principal1;
+                                sumI += Math.Round(interest1, 2, MidpointRounding.AwayFromZero);
+                                sumP += Math.Round(interest1 + amount, 2, MidpointRounding.AwayFromZero);
                             }
+                            else
+                            {
+                                if (Convert.ToDouble(interestonly) > 0)
+                                {
+                                    while (i < Convert.ToDouble(interestonly))
+                                    {
+                                        i++;
+                                        DateTime dateTime1 = StartDate.AddDays(i);
+                                        double interest1 = amount * dailyInterest;
+                                        double principal1 = 0.00;
+                                        balance = LoanAmount;
+                                        //Items.Add(new GridItem()
+                                        //{
+                                        //    PaymentNumber = i.ToString(),
+                                        //    Date = dateTime1.Date.ToString("dd/MM/yyyy"),
+                                        //    Payment = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                        //    EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                                        //    Principal = Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                        //    Interest = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                        //    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                                        //});
+                                        gridItem(i, dateTime1.Date.ToString("dd/MM/yyyy"), Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(), Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                            Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(), Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                            Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString());
+                                        amount = LoanAmount;
+                                        sumP += Math.Round(interest1, 2, MidpointRounding.AwayFromZero);
+                                        sumI += Math.Round(interest1, 2, MidpointRounding.AwayFromZero);
+                                    }
+                                }
 
-                            DateTime dateTime6 = ld.StartDate.AddDays(i + 1);
-                            double interest6 = amount * dailyInterest;
-                            double principal6 = Convert.ToDouble(ld.PMT()) - interest6;
-                            balance -= principal6;
-                            gridItem(i, dateTime6.Date.ToString("dd/MM/yyyy"), amount.ToString(), ld.PMT().ToString(), interest6.ToString(), principal6.ToString(), balance.ToString());
-                            amount -= principal6;
+                                DateTime dateTime = StartDate.AddDays(i + 1);
+                                double interest = amount * dailyInterest;
+                                double principal = PMT - interest;
+                                balance -= principal;
+                                //Items.Add(new GridItem()
+                                //{
+                                //    PaymentNumber = (i + 1).ToString(),
+                                //    Date = dateTime.Date.ToString("dd/MM/yyyy"),
+                                //    Payment = Math.Round(PMT, 2, MidpointRounding.AwayFromZero).ToString(),
+                                //    EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                                //    Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
+                                //    Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
+                                //    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                                //});
+                                gridItem(i + 1, dateTime.Date.ToString("dd/MM/yyyy"), Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(), Math.Round(PMT, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(), Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString());
+                                amount -= principal;
+                                sumI += Math.Round(interest, 2, MidpointRounding.AwayFromZero);
+                                sumP += Math.Round(PMT, 2, MidpointRounding.AwayFromZero);
+                            }
                         }
                     }
-                    //////////////////////////////////////////   }<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-                    //else,<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-                    //{.,,,,,,,,,,,,,,,,,,<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-                    if (Convert.ToDouble(interestonly) > 0)
+                    else
                     {
-                        while (i < Convert.ToDouble(interestonly))
+                        if (Convert.ToDouble(interestonly) > 0)
                         {
-                            i++;
-                            DateTime dateTime1 = ld.StartDate.AddDays(i);
-                            double interest1 = amount * dailyInterest;
-                            double principal1 = 0.00;
-                            balance = Convert.ToDouble(ld.LoanAmount);
-                            gridItem(i, dateTime1.Date.ToString("dd/MM/yyyy"), amount.ToString(), ld.PMT().ToString(), interest1.ToString(), principal1.ToString(), balance.ToString());
-                            amount = Convert.ToDouble(ld.LoanAmount);
+                            while (i < Convert.ToDouble(interestonly))
+                            {
+                                i++;
+                                DateTime dateTime1 = StartDate.AddDays(i);
+                                double interest1 = amount * dailyInterest;
+                                double principal1 = 0.00;
+                                balance = LoanAmount;
+                                //Items.Add(new GridItem()
+                                //{
+                                //    PaymentNumber = i.ToString(),
+                                //    Date = dateTime1.Date.ToString("dd/MM/yyyy"),
+                                //    Payment = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                //    EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                                //    Principal = Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                //    Interest = Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                //    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                                //});
+                                gridItem(i, dateTime1.Date.ToString("dd/MM/yyyy"), Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(), Math.Round(principal1, 2, MidpointRounding.AwayFromZero).ToString(), Math.Round(interest1, 2, MidpointRounding.AwayFromZero).ToString(),
+                                    Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString());
+                                amount = LoanAmount;
+                                sumP += Math.Round(interest1, 2, MidpointRounding.AwayFromZero);
+                                sumI += Math.Round(interest1, 2, MidpointRounding.AwayFromZero);
+                            }
                         }
-                    }
 
-                    DateTime dateTime = ld.StartDate.AddDays(i + 1);
-                    double interest = amount * dailyInterest;
-                    double principal = Convert.ToDouble(ld.PMT()) - interest;
-                    balance -= principal;
-                    gridItem(i, dateTime.Date.ToString("dd/MM/yyyy"), amount.ToString(), ld.PMT().ToString(), interest.ToString(), principal.ToString(), balance.ToString());
-                    amount -= principal;
-                    //////////////////  }<<<<<<<<<<<<<<<
+                        DateTime dateTime = StartDate.AddDays(i + 1);
+                        double interest = amount * dailyInterest;
+                        double principal = PMT - interest;
+                        balance -= principal;
+                        //Items.Add(new GridItem()
+                        //{
+                        //    PaymentNumber = (i + 1).ToString(),
+                        //    Date = dateTime.Date.ToString("dd/MM/yyyy"),
+                        //    Payment = Math.Round(PMT, 2, MidpointRounding.AwayFromZero).ToString(),
+                        //    EndingBalance = Math.Round(balance, 2, MidpointRounding.AwayFromZero).ToString(),
+                        //    Principal = Math.Round(principal, 2, MidpointRounding.AwayFromZero).ToString(),
+                        //    Interest = Math.Round(interest, 2, MidpointRounding.AwayFromZero).ToString(),
+                        //    StartingBalance = Math.Round(amount, 2, MidpointRounding.AwayFromZero).ToString()
+                        //});
+                        amount -= principal;
+                        sumI += Math.Round(interest, 2, MidpointRounding.AwayFromZero);
+                        sumP += Math.Round(PMT, 2, MidpointRounding.AwayFromZero);
+                    }
                 }
+                //ItemsSum.Add(new GridItem()
+                //{
+                //    InterestSum = Math.Round(sumI, 2, MidpointRounding.AwayFromZero).ToString(),
+                //    PeymentSum = Math.Round(sumP, 2, MidpointRounding.AwayFromZero).ToString(),
+                //    sumSum = Math.Round(sumP / sumI, 2, MidpointRounding.AwayFromZero).ToString()
+                //});
             }
             catch (Exception)
             {
-                gridItem(1, "", "", "", "rr", "rr", "rrr");
-            
             }
-
         }
+
     }
 }

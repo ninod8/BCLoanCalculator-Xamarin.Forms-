@@ -20,7 +20,7 @@
       <DatePicker x:Name="DP2" Date="{Binding EndDate}" Margin="15,5" />
 
       <Label x:Name="AnnuityDailyTermLabel" Text="სესხის ვადა (დღე)" FontSize="13" Font="Bold" Margin="15,5"/>
-      <Entry Keyboard="Numeric" x:Name="TermsOfLoanEntry" BackgroundColor="White" BindingContext="{Binding GridViewAnnnuityDaily}" Text="{Binding TermsOfLoan}" Margin="15,5"/>
+      <Entry Keyboard="Numeric" x:Name="TermsOfLoanEntry" BackgroundColor="White"  Text="{Binding TermsOfLoan}" Margin="15,5"/>
       
       <Label x:Name="AnnuityDailyDailyRateLabel" Text="ყოველდღიური საპროცენტო განაკვეთი (%)" Font="Bold" FontSize="13" Margin="15,5"/>
       <Entry Keyboard="Numeric"  x:Name="DailyRateEntry" Text="{Binding DailyRate, Mode=TwoWay}" BackgroundColor="White" Margin="15,5"/>
@@ -33,6 +33,12 @@
       
       <Label x:Name="AnnuityDailyPaymentLabel" Text="ყოველდღიური გადასახადი" Font="Bold" FontSize="13"  Margin="15,5"/>
       <Entry Keyboard="Numeric" x:Name="PaymentEntry" Text="{Binding Payment}" BackgroundColor="White" Margin="15,5"/>
+
+      <Label x:Name="Label1" FontSize="13"  Margin="15,5"/>
+      <Label x:Name="Label2" FontSize="13"  Margin="15,5"/>
+
+      <Label x:Name="Label3" FontSize="13"  Margin="15,5"/>
+
       <Button x:Name="Btn" Text="გრაფიკის დათვლა" />
     </StackLayout>
   </ScrollView>

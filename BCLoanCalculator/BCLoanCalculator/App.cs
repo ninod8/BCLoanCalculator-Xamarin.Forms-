@@ -17,6 +17,7 @@ namespace BCLoanCalculator
             App.MasterDetail.IsPresented = false;
             await App.MasterDetail.Detail.Navigation.PushAsync(page);
         }
+        internal static string PmtAD;
         internal static string LoanAmountAD;
         internal static string LoanAmountAM;
         internal static string LoanAmountFM;
