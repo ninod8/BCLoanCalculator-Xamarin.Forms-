@@ -9,17 +9,37 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Windows.ApplicationModel.DataTransfer;
 using UIKit;
+using Microsoft.VisualBasic;
+
 
 namespace BCLoanCalculator
 {
     public partial class AnnuityDaily : ContentPage
     {
+        public AnnuityDailyCalc LD { get; set; }
+
         public AnnuityDaily()
         {
             InitializeComponent();
-            var ld = this.BindingContext as AnnuityDailyCalc;
+            this.BindingContext = LD;
 
             BindingContext = new AnnuityDailyCalc();
+            LD = BindingContext as AnnuityDailyCalc;
+            ToolbarItems.Add(new ToolbarItem("X", "X",  () =>
+            {
+                // var page = new ContentPage();
+                //  new AnnuityDaily();
+                TermsOfLoanEntry.Text = string.Empty;
+                LoanAmountEntry.Text = string.Empty;
+                DP1.Date = DateTime.Today;
+                DP2.Date = DateTime.Today.Date;
+                PaymentEntry.Text = string.Empty;
+                InterestOnlyEntry.Text = string.Empty;
+                AnnualRateEntry.Text = string.Empty;
+                DailyRateEntry.Text = string.Empty;
+                AnnualRateEntry.Placeholder = string.Empty;
+                DailyRateEntry.Placeholder = string.Empty;
+            }));
             #region Interface
             DP1.Date = DateTime.Today.Date;
             DP2.Date = DateTime.Today.Date;
@@ -71,20 +91,24 @@ namespace BCLoanCalculator
             AnnualRateEntry.TextChanged += (object sender, TextChangedEventArgs e) =>
                 {
                     try
-                    {
+                    { 
                         DailyRateEntry.Text = "";
                         //double j = ;
                         string g = Math.Round((Convert.ToDouble(AnnualRateEntry.Text) / 365), 3, MidpointRounding.AwayFromZero).ToString("N", CultureInfo.InvariantCulture);
-                        DailyRateEntry.Placeholder = g + "%";
+                        DailyRateEntry.Placeholder = g + "%"; 
+                      // App.data =  AnnualRateEntry.Text;
+                      
                     }
                     catch (Exception)
                     {
+
 
                     }
 
                 };
             Btn.Clicked += async (sender, e) =>
             {
+                var btn = sender as Button;
                 await App.NavigateMasterDetail(new GridViewAnnnuityDaily());
             };
             DailyRateEntry.TextChanged += (object sender, TextChangedEventArgs e) =>
@@ -94,6 +118,7 @@ namespace BCLoanCalculator
                       AnnualRateEntry.Text = "";
                       string g = Math.Round((Convert.ToDouble(DailyRateEntry.Text) * 365), 3, MidpointRounding.AwayFromZero).ToString("N", CultureInfo.InvariantCulture);
                       AnnualRateEntry.Placeholder = g + "%";
+                      App.AnnualRateAD = AnnualRateEntry.Placeholder;
                   }
                   catch (Exception)
                   {
@@ -116,14 +141,14 @@ namespace BCLoanCalculator
     public class AnnuityDailyCalc : INotifyPropertyChanged
     {
         #region privateVariables
-        private string loanAmount;
-        private string termsOfLoan;
-        private string dailyRate;
-        private string annualRate;
-        private string payment;
-        private DateTime startDate;
-        private DateTime endDate;
-        private string interestOnly;
+        private string loanAmount = App.LoanAmountAD;
+        private string termsOfLoan=App.TermAD;
+        private string dailyRate=App.DailyRateAD;
+        private string annualRate=App.AnnualRateAD;
+        private string payment=App.PaymentAD;
+        private DateTime startDate=App.StartDateAD;
+        private DateTime endDate=App.EndDateAD;
+        private string interestOnly=App.InterestOnlyAD;
 
 
 
@@ -147,6 +172,7 @@ namespace BCLoanCalculator
                     //      termsOfLoan = NperDaily();
                     //  }
                     //else
+                    App.LoanAmountAD = value;
                     payment = PMT();
 
                     OnPropertyChanged(nameof(LoanAmount));
@@ -174,6 +200,7 @@ namespace BCLoanCalculator
                 try
                 {
                     termsOfLoan = value;
+                    App.TermAD = value;
                     endDate = startDate.Date.AddDays(Convert.ToDouble(termsOfLoan));
                     // if (Convert.ToDouble(payment) > 0)
                     // {
@@ -206,6 +233,7 @@ namespace BCLoanCalculator
                 try
                 {
                     dailyRate = value;
+                    App.DailyRateAD = value;
                     payment = PMT();
 
                     OnPropertyChanged(nameof(LoanAmount));
@@ -233,7 +261,7 @@ namespace BCLoanCalculator
                 try
                 {
                     annualRate = value;
-
+                    App.AnnualRateAD = value;
                     payment = PMT();
 
                     OnPropertyChanged(nameof(LoanAmount));
@@ -259,7 +287,7 @@ namespace BCLoanCalculator
             set
             {
                 payment = value;
-
+                App.PaymentAD = value;
                 try
                 {
                     //if (Convert.ToDouble(payment) > 0)
@@ -284,6 +312,7 @@ namespace BCLoanCalculator
                 try
                 {
                     startDate = value;
+                    App.StartDateAD = value;
                     termsOfLoan = CountDays();
                     // if (Convert.ToDouble(payment) > 0)
                     // {
@@ -315,6 +344,7 @@ namespace BCLoanCalculator
                 try
                 {
                     endDate = value;
+                    App.EndDateAD = value;
                     termsOfLoan = CountDays();
                     //if (Convert.ToDouble(payment) > 0)
                     //{
@@ -347,6 +377,7 @@ namespace BCLoanCalculator
                 try
                 {
                     interestOnly = value;
+                    App.InterestOnlyAD = value;
                     //if (Convert.ToDouble(payment) > 0)
                     //{
                     //    termsOfLoan = NperDaily();

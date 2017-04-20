@@ -18,13 +18,13 @@ namespace BCLoanCalculator
             BindingContext = new FlatRateDailyCalc();
             #region Interface
             LabelFontFamily(MainLabel);
+            LabelFontFamily(LoanAmountLabel);
             LabelFontFamily(FlatDailyAnnualRateLabel);
             LabelFontFamily(FlatDailyEndDateLabel);
             LabelFontFamily(FlatDailyPaymentLabel);
             LabelFontFamily(FlatDailyRateLabel);
             LabelFontFamily(FlatDailyStartDateLabel);
             LabelFontFamily(FlatDailyTermLabel);
-        //    LabelFontFamily();
             DP1.Date = DateTime.Today.Date;
             DP2.Date = DateTime.Today.Date;
             MainLabel.VerticalTextAlignment = TextAlignment.Center;
@@ -53,6 +53,21 @@ namespace BCLoanCalculator
             FlatDailyTermLabel.TextColor = Color.FromRgb(2, 117, 157);
             FlatDailyTermLabel.FontSize = 14;
             #endregion
+            ToolbarItems.Add(new ToolbarItem("X", "X", () =>
+            {
+                // var page = new ContentPage();
+                //  new AnnuityDaily();
+                TermsOfLoanEntry.Text = string.Empty;
+                LoanAmountEntry.Text = string.Empty;
+                DP1.Date = DateTime.Today;
+                DP2.Date = DateTime.Today.Date;
+                PaymentEntry.Text = string.Empty;
+                AnnualRateEntry.Text = string.Empty;
+                DailyRateEntry.Text = string.Empty;
+                AnnualRateEntry.Placeholder = string.Empty;
+                DailyRateEntry.Placeholder = string.Empty;
+                PaymentEntry.Text = string.Empty;
+            }));
             Btn.Clicked += async (sender, e) =>
             {
                 await App.NavigateMasterDetail(new GridViewFlatDaily());
@@ -69,14 +84,13 @@ namespace BCLoanCalculator
         public class FlatRateDailyCalc : INotifyPropertyChanged
         {
             #region privateVariables
-            private string loanAmount;
-            private string termsOfLoan;
-            private string dailyRate;
-            private string annualRate;
-            private string payment;
-            private DateTime startDate;
-            private DateTime endDate;
-
+            private string loanAmount=App.LoanAmountFD;
+            private string termsOfLoan=App.TermFD;
+            private string dailyRate=App.DailyRateFD;
+            private string annualRate=App.AnnualRateFD;
+            private string payment=App.PaymentFD;
+            private DateTime startDate=App.StartDateFD;
+            private DateTime endDate=App.EndDateFD;
 
             #endregion
             public event PropertyChangedEventHandler PropertyChanged;
@@ -88,13 +102,22 @@ namespace BCLoanCalculator
             public string LoanAmount
             {
                 get { return loanAmount; }
-                set { loanAmount = value; }
+                set
+                {
+                    loanAmount = value;
+                    App.LoanAmountFD = value;
+                }
             }
 
             public string TermsOfLoan
             {
                 get { return termsOfLoan; }
-                set { termsOfLoan = value; }
+                set
+                {
+                    termsOfLoan = value;
+                    App.TermFD = value;
+
+                }
             }
 
             public string DailyRate
@@ -105,7 +128,9 @@ namespace BCLoanCalculator
                     try
                     {
                         dailyRate = value;
-                        annualRate = Math.Round((Convert.ToDouble(dailyRate) * 365), 3, MidpointRounding.AwayFromZero).ToString();
+                        App.DailyRateFD = value;
+
+                       // annualRate = Math.Round((Convert.ToDouble(dailyRate) * 365), 3, MidpointRounding.AwayFromZero).ToString();
                         OnPropertyChanged();
                         OnPropertyChanged(nameof(AnnualRate));
                     }
@@ -124,7 +149,8 @@ namespace BCLoanCalculator
                     try
                     {
                         annualRate = value;
-                        DailyRate = Math.Round((Convert.ToDouble(annualRate) / 365), 3, MidpointRounding.AwayFromZero).ToString();
+                        App.AnnualRateFD = value;
+                       // DailyRate = Math.Round((Convert.ToDouble(annualRate) / 365), 3, MidpointRounding.AwayFromZero).ToString();
                         OnPropertyChanged();
                         OnPropertyChanged(nameof(DailyRate));
                     }
@@ -138,19 +164,31 @@ namespace BCLoanCalculator
             public string Payment
             {
                 get { return payment; }
-                set { payment = value; }
+                set
+                {
+                    payment = value;
+                    App.PaymentFD = value;
+                }
             }
 
             public DateTime StartDate
             {
                 get { return startDate; }
-                set { startDate = value; }
+                set
+                {
+                    startDate = value;
+                    App.StartDateFD = value;
+                }
             }
 
             public DateTime EndDate
             {
                 get { return endDate; }
-                set { endDate = value; }
+                set
+                {
+                    endDate = value;
+                    App.EndDateFD = value;
+                }
             }
         }
         public void LabelFontFamily(Label label)

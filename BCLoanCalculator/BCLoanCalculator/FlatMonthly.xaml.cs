@@ -21,43 +21,59 @@ namespace BCLoanCalculator
             DP1.Date = DateTime.Today.Date;
             DP2.Date = DateTime.Today.Date;
             LabelFontFamily(MainLabel);
-            LabelFontFamily(FlatMonthlyAnnualRateLabel);
-            LabelFontFamily(FlatMonthlyEndDateLabel);
-            LabelFontFamily(FlatMonthlyFirstPaymentLabel);
-            LabelFontFamily(FlatMonthlyLoanAmountLabel);
-            LabelFontFamily(FlatMonthlyPaymentLabel);
-            LabelFontFamily(FlatMonthlyRateLabel);
-            LabelFontFamily(FlatMonthlyStartDateLabel);
-            LabelFontFamily(FlatMonthlyTermLabel);
+            LabelFontFamily(AnnualRateLabel);
+            LabelFontFamily(EndDateLabel);
+            LabelFontFamily(FirstPaymentLabel);
+            LabelFontFamily(LoanAmountLabel);
+            LabelFontFamily(PaymentLabel);
+            LabelFontFamily(MonthlyRateLabel);
+            LabelFontFamily(StartDateLabel);
+            LabelFontFamily(TermLabel);
             MainLabel.VerticalTextAlignment = TextAlignment.Center;
             MainLabel.TextColor = Color.FromRgb(2, 117, 157);
             MainLabel.FontSize = 17;
             MainLabel.HorizontalTextAlignment = TextAlignment.Center;
-            FlatMonthlyAnnualRateLabel.VerticalTextAlignment = TextAlignment.Center;
-            FlatMonthlyAnnualRateLabel.TextColor = Color.FromRgb(2, 117, 157);
-            FlatMonthlyAnnualRateLabel.FontSize = 14;
-            FlatMonthlyEndDateLabel.VerticalTextAlignment = TextAlignment.Center;
-            FlatMonthlyEndDateLabel.TextColor = Color.FromRgb(2, 117, 157);
-            FlatMonthlyEndDateLabel.FontSize = 14;
-            FlatMonthlyFirstPaymentLabel.VerticalTextAlignment = TextAlignment.Center;
-            FlatMonthlyFirstPaymentLabel.TextColor = Color.FromRgb(2, 117, 157);
-            FlatMonthlyFirstPaymentLabel.FontSize = 14;
-            FlatMonthlyLoanAmountLabel.VerticalTextAlignment = TextAlignment.Center;
-            FlatMonthlyLoanAmountLabel.FontSize = 14;
-            FlatMonthlyLoanAmountLabel.TextColor = Color.FromRgb(2, 117, 157);
-            FlatMonthlyPaymentLabel.VerticalTextAlignment = TextAlignment.Center;
-            FlatMonthlyPaymentLabel.TextColor = Color.FromRgb(2, 117, 157);
-            FlatMonthlyPaymentLabel.FontSize = 14;
-            FlatMonthlyRateLabel.VerticalTextAlignment = TextAlignment.Center;
-            FlatMonthlyRateLabel.TextColor = Color.FromRgb(2, 117, 157);
-            FlatMonthlyRateLabel.FontSize = 14;
-            FlatMonthlyStartDateLabel.VerticalTextAlignment = TextAlignment.Center;
-            FlatMonthlyStartDateLabel.TextColor = Color.FromRgb(2, 117, 157);
-            FlatMonthlyStartDateLabel.FontSize = 14;
-            FlatMonthlyTermLabel.VerticalTextAlignment = TextAlignment.Center;
-            FlatMonthlyTermLabel.TextColor = Color.FromRgb(2, 117, 157);
-            FlatMonthlyTermLabel.FontSize = 14;
+            AnnualRateLabel.VerticalTextAlignment = TextAlignment.Center;
+            AnnualRateLabel.TextColor = Color.FromRgb(2, 117, 157);
+            AnnualRateLabel.FontSize = 14;
+            EndDateLabel.VerticalTextAlignment = TextAlignment.Center;
+            EndDateLabel.TextColor = Color.FromRgb(2, 117, 157);
+            EndDateLabel.FontSize = 14;
+            FirstPaymentLabel.VerticalTextAlignment = TextAlignment.Center;
+            FirstPaymentLabel.TextColor = Color.FromRgb(2, 117, 157);
+            FirstPaymentLabel.FontSize = 14;
+            LoanAmountLabel.VerticalTextAlignment = TextAlignment.Center;
+            LoanAmountLabel.FontSize = 14;
+            LoanAmountLabel.TextColor = Color.FromRgb(2, 117, 157);
+            PaymentLabel.VerticalTextAlignment = TextAlignment.Center;
+            PaymentLabel.TextColor = Color.FromRgb(2, 117, 157);
+            PaymentLabel.FontSize = 14;
+            MonthlyRateLabel.VerticalTextAlignment = TextAlignment.Center;
+            MonthlyRateLabel.TextColor = Color.FromRgb(2, 117, 157);
+            MonthlyRateLabel.FontSize = 14;
+            StartDateLabel.VerticalTextAlignment = TextAlignment.Center;
+            StartDateLabel.TextColor = Color.FromRgb(2, 117, 157);
+            StartDateLabel.FontSize = 14;
+            TermLabel.VerticalTextAlignment = TextAlignment.Center;
+            TermLabel.TextColor = Color.FromRgb(2, 117, 157);
+            TermLabel.FontSize = 14;
             #endregion
+            ToolbarItems.Add(new ToolbarItem("X", "X", () =>
+            {
+                // var page = new ContentPage();
+                //  new AnnuityDaily();
+                TermsOfLoanEntry.Text = string.Empty;
+                LoanAmountEntry.Text = string.Empty;
+                DP1.Date = DateTime.Today.Date;
+                DP2.Date = DateTime.Today.Date;
+                DP0.Date = DateTime.Today.Date;
+                PaymentEntry.Text = string.Empty;
+                AnnualRateEntry.Text = string.Empty;
+                MonthlyRateEntry.Text = string.Empty;
+                AnnualRateEntry.Placeholder = string.Empty;
+                MonthlyRateEntry.Placeholder = string.Empty;
+                PaymentEntry.Text = string.Empty;
+            }));
             Btn.TextColor = Color.White;
             Btn.BackgroundColor = Color.FromRgb(2, 117, 157);
             Btn.FontFamily = Device.OnPlatform(
@@ -73,14 +89,14 @@ namespace BCLoanCalculator
         public class FlatRateMonthlyCalc : INotifyPropertyChanged
         {
             #region privateVariables
-            private string loanAmount;
-            private string termsOfLoan;
-            private string monthlyRate;
-            private string annualRate;
-            private string payment;
-            private DateTime startDate;
-            private DateTime endDate;
-            private DateTime firstPaymentDate;
+            private string loanAmount = App.LoanAmountFM;
+            private string termsOfLoan = App.TermFM;
+            private string monthlyRate = App.MonthlyRateFM;
+            private string annualRate = App.AnnualRateFM;
+            private string payment = App.PaymentFM;
+            private DateTime startDate = App.StartDateFM;
+            private DateTime endDate = App.EndDateFM;
+            private DateTime firstPaymentDate = App.ReleaseDateFM;
 
 
             #endregion
@@ -94,13 +110,21 @@ namespace BCLoanCalculator
             public string LoanAmount
             {
                 get { return loanAmount; }
-                set { loanAmount = value; }
+                set
+                {
+                    loanAmount = value;
+                    App.LoanAmountFM = value;
+                }
             }
 
             public string TermsOfLoan
             {
                 get { return termsOfLoan; }
-                set { termsOfLoan = value; }
+                set
+                {
+                    termsOfLoan = value;
+                    App.TermFM = value;
+                }
             }
 
             public string MonthlyRate
@@ -109,7 +133,9 @@ namespace BCLoanCalculator
                 set
                 {
                     monthlyRate = value;
-                    annualRate = Math.Round((Convert.ToDouble(monthlyRate) * 12), 3, MidpointRounding.AwayFromZero).ToString();
+                    App.MonthlyRateFM = value;
+
+                   // annualRate = Math.Round((Convert.ToDouble(monthlyRate) * 12), 3, MidpointRounding.AwayFromZero).ToString();
                     OnPropertyChanged(nameof(AnnualRate));
                     OnPropertyChanged();
                 }
@@ -121,7 +147,9 @@ namespace BCLoanCalculator
                 set
                 {
                     annualRate = value;
-                    monthlyRate = Math.Round((Convert.ToDouble(annualRate) / 12), 3, MidpointRounding.AwayFromZero).ToString();
+                    App.AnnualRateFM = value;
+
+                  //  monthlyRate = Math.Round((Convert.ToDouble(annualRate) / 12), 3, MidpointRounding.AwayFromZero).ToString();
                     OnPropertyChanged();
                     OnPropertyChanged(nameof(MonthlyRate));
                 }
@@ -130,25 +158,44 @@ namespace BCLoanCalculator
             public string Payment
             {
                 get { return payment; }
-                set { payment = value; }
+                set
+                {
+                    payment = value;
+                    App.PaymentFM = value;
+
+                }
             }
 
             public DateTime StartDate
             {
                 get { return startDate; }
-                set { startDate = value; }
+                set
+                {
+                    startDate = value;
+                    App.StartDateFM = value;
+
+                }
             }
 
             public DateTime EndDate
             {
                 get { return endDate; }
-                set { endDate = value; }
+                set
+                {
+                    endDate = value;
+                    App.EndDateFM = value;
+
+                }
             }
 
             public DateTime FirstPaymentDate
             {
                 get { return firstPaymentDate; }
-                set { firstPaymentDate = value; }
+                set
+                {
+                    firstPaymentDate = value;
+                    App.ReleaseDateFM = value;
+                }
             }
 
         }

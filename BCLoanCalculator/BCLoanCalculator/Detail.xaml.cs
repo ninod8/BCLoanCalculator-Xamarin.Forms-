@@ -17,7 +17,7 @@ namespace BCLoanCalculator
             InitializeComponent();
             bc.WidthRequest = 150;
             bc.HeightRequest = 150;
-            
+           ////////////////////////////////////////////////////////<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<gasuptaveba
             Label.Text = "ბიზნეს კრედიტი";
             Label2.Text = "___ფული, რომელიც გეხმარება___";
             LabelFontFamily(Label);

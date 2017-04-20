@@ -6,29 +6,29 @@
     <StackLayout Padding="10">
       <Label x:Name="MainLabel" Text="ყოველთვიური ბრტყელი პროცენტი"  Font="Bold" Margin="15,5" />
       
-      <Label x:Name="FlatMonthlyLoanAmountLabel" Text="სესხის თანხა" FontSize="13" Font="Bold" Margin="15,5"/>
-      <Entry Keyboard="Numeric" Text="{Binding LoanAmount}" x:Name="FlatMonthlyEntry" BackgroundColor="White" Margin="15,5"/>
+      <Label x:Name="LoanAmountLabel" Text="სესხის თანხა" FontSize="13" Font="Bold" Margin="15,5"/>
+      <Entry Keyboard="Numeric" Text="{Binding LoanAmount}" x:Name="LoanAmountEntry" BackgroundColor="White" Margin="15,5"/>
       
-      <Label x:Name="FlatMonthlyStartDateLabel" Text="სესხის გაცემის თარიღი" FontSize="13" Font="Bold" Margin="15,5"/>
+      <Label x:Name="StartDateLabel" Text="სესხის გაცემის თარიღი" FontSize="13" Font="Bold" Margin="15,5"/>
       <DatePicker x:Name="DP0" Date="{Binding StartDate}" Margin="15,5"/>
       
-      <Label x:Name="FlatMonthlyFirstPaymentLabel" Text="პირველი გადახდის თარიღი" FontSize="13" Font="Bold" Margin="15,5"/>
+      <Label x:Name="FirstPaymentLabel" Text="პირველი გადახდის თარიღი" FontSize="13" Font="Bold" Margin="15,5"/>
       <DatePicker x:Name="DP1" Date="{Binding EndDate}" Margin="15,5"/>
       
-      <Label x:Name="FlatMonthlyEndDateLabel" Text="სესხის დაფარვის თარიღი" FontSize="13" Font="Bold" Margin="15,5"/>
+      <Label x:Name="EndDateLabel" Text="სესხის დაფარვის თარიღი" FontSize="13" Font="Bold" Margin="15,5"/>
       <DatePicker x:Name="DP2" Date="{Binding FirstPaymentDate}" Margin="15,5"/>
       
-      <Label  x:Name="FlatMonthlyTermLabel"  Text="სესხის ვადა (თვე)" FontSize="13" Font="Bold" Margin="15,5"/>
-      <Entry Keyboard="Numeric" Text="{Binding TermsOfLoan}" x:Name="TermsOfLoanEntry" BackgroundColor="White" Margin="15,5"/>
+      <Label  x:Name="TermLabel"  Text="სესხის ვადა (თვე)" FontSize="13" Font="Bold" Margin="15,5"/>
+      <Entry Keyboard="Numeric" Text="{Binding TermsOfLoan}" x:Name="TermsOfLoanEntry"  Margin="15,5"/>
       
-      <Label  x:Name="FlatMonthlyRateLabel" Text="ყოველთვიური საპროცენტო განაკვეთი (%)" Font="Bold" FontSize="13" Margin="15,5"/>
-      <Entry Keyboard="Numeric" Text="{Binding MonthlyRate}" x:Name="MonthlyRatEntry" BackgroundColor="White" Margin="15,5"/>
+      <Label  x:Name="MonthlyRateLabel" Text="ყოველთვიური საპროცენტო განაკვეთი (%)" Font="Bold" FontSize="13" Margin="15,5"/>
+      <Entry Keyboard="Numeric" Text="{Binding MonthlyRate}" x:Name="MonthlyRateEntry" Margin="15,5"/>
       
-      <Label  x:Name="FlatMonthlyAnnualRateLabel"  Text="წლიური საპროცენტო განაკვეთი (%)" Font="Bold" FontSize="13" Margin="15,5"/>
-      <Entry Keyboard="Numeric" Text="{Binding AnnualRate}" x:Name="AnnualRateEntry" BackgroundColor="White"  Margin="15,5"/>
+      <Label  x:Name="AnnualRateLabel"  Text="წლიური საპროცენტო განაკვეთი (%)" Font="Bold" FontSize="13" Margin="15,5"/>
+      <Entry Keyboard="Numeric" Text="{Binding AnnualRate}" x:Name="AnnualRateEntry"   Margin="15,5"/>
       
-      <Label x:Name="FlatMonthlyPaymentLabel" Text="ყოველდღიური გადასახადი" Font="Bold" FontSize="13"  Margin="15,5"/>
-      <Entry Keyboard="Numeric" Text="{Binding Payment}" x:Name="PaymentEntry" BackgroundColor="White" Margin="15,5"/>
+      <Label x:Name="PaymentLabel" Text="ყოველდღიური გადასახადი" Font="Bold" FontSize="13"  Margin="15,5"/>
+      <Entry Keyboard="Numeric" Text="{Binding Payment}" x:Name="PaymentEntry"  Margin="15,5"/>
       <Button x:Name="Btn" Text="გრაფიკის დათვლა" />
 
     </StackLayout>

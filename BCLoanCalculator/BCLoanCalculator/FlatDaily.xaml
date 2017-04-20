@@ -8,7 +8,7 @@
       <Label x:Name="MainLabel" Text="ყოველდღიური ბრტყელი პროცენტი" FontSize="13" Font="Bold" Margin="15,5" />
 
       <Label x:Name="LoanAmountLabel" Text="სესხის თანხა" FontSize="13" Font="Bold" Margin="15,5" />
-      <Entry Keyboard="Numeric" Text="{Binding LoanAmount}" x:Name="FlatDailyEntry" BackgroundColor="White" Margin="15,5" />
+      <Entry Keyboard="Numeric" Text="{Binding LoanAmount}" x:Name="LoanAmountEntry" BackgroundColor="White" Margin="15,5" />
       
       <Label  x:Name="FlatDailyStartDateLabel" Text="სესხის გაცემის თარიღი" FontSize="13" Font="Bold" Margin="15,5"/>
       <DatePicker x:Name="DP1" Date="{Binding StartDate}" Margin="15,5"/>
@@ -20,7 +20,7 @@
       <Entry Keyboard="Numeric" Text="{Binding TermsOfLoan}" x:Name="TermsOfLoanEntry" BackgroundColor="White" Margin="15,5"/>
       
       <Label  x:Name="FlatDailyRateLabel" Text="ყოველდღიური საპროცენტო განაკვეთი (%)" Font="Bold" FontSize="13" Margin="15,5"/>
-      <Entry Keyboard="Numeric" Text="{Binding DailyRate}" x:Name="DailyRatEntry" BackgroundColor="White" Margin="15,5"/>
+      <Entry Keyboard="Numeric" Text="{Binding DailyRate}" x:Name="DailyRateEntry" BackgroundColor="White" Margin="15,5"/>
       
       <Label x:Name="FlatDailyAnnualRateLabel"  Text="წლიური საპროცენტო განაკვეთი (%)" Font="Bold" FontSize="13" Margin="15,5"/>
       <Entry Keyboard="Numeric" Text="{Binding AnnualRate}" x:Name="AnnualRateEntry" BackgroundColor="White"  Margin="15,5"/>
