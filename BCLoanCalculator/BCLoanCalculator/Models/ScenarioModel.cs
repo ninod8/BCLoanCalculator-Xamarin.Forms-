@@ -117,7 +117,7 @@ namespace BCLoanCalculator.Models
             var result = new List<GraphViewModel>();
             try
             {
-                List<double> list = new List<double>();
+               // List<double> list = new List<double>();
                 double endingBalance = Convert.ToDouble(LoanAmount);
                 double rate = Convert.ToDouble(AnnualRate) / 36500;
                 double startingBalance = Convert.ToDouble(LoanAmount);
@@ -204,11 +204,7 @@ namespace BCLoanCalculator.Models
                     i = Convert.ToInt32(TermsOfScenario);
 
                 }
-                list.Add(35);
-                list.Add(35); list.Add(35); list.Add(35); list.Add(868.87);
-
-                double irr = IRR(list, 1000, 5, 0.0019);
-                Effect(0.6935, 365);
+        
             }
             catch (Exception)
             {
@@ -221,26 +217,26 @@ namespace BCLoanCalculator.Models
             var model = GraphViewModel.GetViewModel(data);
             return model;
         }
-        public double IRR(List<double> list, double loanAmount, int term, double rate)
-        {
-            double sum = 0;
-            for (int i = 1; i <= term; i++)
-            {
-                foreach (double item in list)
-                {
-                    double x = item / Math.Pow((1 + rate), i);
-                    sum += x;
-                    i++;
-                }
-            }
-            return Math.Round((sum - loanAmount),4,MidpointRounding.AwayFromZero);
-        }
-        public double Effect(double IRR, int term)
-        {
+        //public double IRR(List<double> list, double loanAmount, int term, double rate)
+        //{
+        //    double sum = 0;
+        //    for (int i = 1; i <= term; i++)
+        //    {
+        //        foreach (double item in list)
+        //        {
+        //            double x = item / Math.Pow((1 + rate), i);
+        //            sum += x;
+        //            i++;
+        //        }
+        //    }
+        //    return Math.Round((sum - loanAmount),4,MidpointRounding.AwayFromZero);
+        //}
+        //public double Effect(double IRR, int term)
+        //{
 
-            double effect = Math.Pow(1 + (IRR / term), term) - 1;
-            return effect;
-        }
+        //    double effect = Math.Pow(1 + (IRR / term), term) - 1;
+        //    return effect;
+        //}
 
     }
 }
