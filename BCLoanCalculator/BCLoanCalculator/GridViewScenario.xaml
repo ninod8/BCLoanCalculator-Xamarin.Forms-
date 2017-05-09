@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BCLoanCalculator.GridViewScenario">
+  <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+  <ScrollView x:Name="scrollView">
+  <ListView x:Name="gridData"  HasUnevenRows="True">
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <ViewCell>
+          <ViewCell.View>
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="130"/>
+
+              </Grid.ColumnDefinitions>
+              <Label Grid.Column="0" Text="{Binding PaymentNumber}"           ></Label>
+              <Label Grid.Column="1" Text="{Binding Date}"             ></Label>
+              <Label Grid.Column="2" Text="{Binding StartingBalance}"  ></Label>
+              <Label Grid.Column="3" Text="{Binding Payment}"           ></Label>
+              <Label Grid.Column="4" Text="{Binding Penalty}"           ></Label>
+
+              <Label Grid.Column="5" Text="{Binding Rate}"                   ></Label>
+              <Label Grid.Column="6" Text="{Binding Principal}"           ></Label>
+              <Label Grid.Column="7" Text="{Binding EndingBalance}"        ></Label>
+            </Grid>
+          </ViewCell.View>
+        </ViewCell>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+  </ListView></ScrollView>
+</ContentPage>

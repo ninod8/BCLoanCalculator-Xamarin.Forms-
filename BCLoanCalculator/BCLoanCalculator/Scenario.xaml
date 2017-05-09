@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BCLoanCalculator.Scenario"
+      BackgroundColor="#FFFFFF" >
+  <ScrollView>
+    <StackLayout Padding="10">
+  <Label x:Name ="MainLabel" Text = "სცენარი" FontAttributes="Bold" Margin="15,5"/>
+
+  <Label x:Name="LoanAmountLabel" Text="სესხის თანხა" FontSize="13" Font="Bold" Margin="15,5"/>
+  <Entry  Keyboard="Numeric" x:Name="LoanAmountEntry" Text="{Binding LoanAmount}" BackgroundColor="White" Margin="15,5"/>
+
+  <Label x:Name="StartDateLabel" Text="სესხის გაცემის თარიღი" FontSize="13" FontAttributes="Bold" Margin="15,5"/>
+  <DatePicker x:Name="DP1" Date="{Binding StartDate}" Margin="15,5"/>
+
+  <Label x:Name="EndDateLabel" Text="სესხის დაფარვის თარიღი" FontSize="13" Font="Bold" Margin="15,5"/>
+  <DatePicker x:Name="DP2" Date="{Binding EndDate}" Margin="15,5" />
+
+  <Label x:Name="ScenarioLabel" Text="სცენარის ვადა (დღე)" FontSize="13" Font="Bold" Margin="15,5"/>
+  <Entry Keyboard="Numeric" x:Name="TermsOfScenarioEntry" BackgroundColor="White"  Text="{Binding TermsOfScenario}" Margin="15,5"/>
+  
+    <Label x:Name="TermLabel" Text="გრაფიკის ვადა (დღე)" FontSize="13" Font="Bold" Margin="15,5"/>
+  <Entry Keyboard="Numeric" x:Name="TermsOfLoanEntry" BackgroundColor="White"  Text="{Binding TermsOfLoan}" Margin="15,5"/>
+
+  <!--<Label x:Name="DailyRateLabel" Text="ყოველდღიური საპროცენტო განაკვეთი (%)" Font="Bold" FontSize="13" Margin="15,5"/>
+  <Entry Keyboard="Numeric"  x:Name="DailyRateEntry" Text="{Binding DailyRate}" BackgroundColor="White" Margin="15,5"/>-->
+
+  <Label x:Name="AnnualRateLabel" Text="წლიური საპროცენტო განაკვეთი (%)" Font="Bold" FontSize="13" Margin="15,5"/>
+  <Entry Keyboard="Numeric"  x:Name="AnnualRateEntry" BackgroundColor="White" Text="{Binding AnnualRate}" Margin="15,5"/>
+  
+  <Label x:Name="PenaltyRateLabel" Text="პირგასამტეხლო დღეში (%)" Font="Bold" FontSize="13" Margin="15,5"/>
+  <Entry Keyboard="Numeric"  x:Name="PenaltyRateEntry" BackgroundColor="White" Text="{Binding PenaltyRate}" Margin="15,5"/>
+
+  <Label x:Name="PaymentLabel" Text="შენატანი" Font="Bold" FontSize="13"  Margin="15,5"/>
+  <Entry Keyboard="Numeric" x:Name="PaymentEntry" Text="{Binding Payment}" BackgroundColor="White" Margin="15,5"/>
+
+ 
+      
+      <Button x:Name="CalculateGraph" Text="გრაფიკის დათვლა" />
+    </StackLayout>
+  </ScrollView>
+</ContentPage>

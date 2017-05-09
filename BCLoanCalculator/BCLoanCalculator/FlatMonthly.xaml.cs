@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BCLoanCalculator.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -12,50 +13,62 @@ namespace BCLoanCalculator
 {
     public partial class FlatMonthly : ContentPage
     {
+        public FlatRateMonthlyModel Model
+        {
+            get
+            {
+                return BindingContext as FlatRateMonthlyModel;
+            }
+        }
         public FlatMonthly()
         {
             InitializeComponent();
-            BindingContext = new FlatRateMonthlyCalc();
+            BindingContext = new FlatRateMonthlyModel();
+            Color color = Color.FromRgb(2, 117, 157);
             #region Interface
-            DP0.Date = DateTime.Today.Date;
-            DP1.Date = DateTime.Today.Date;
-            DP2.Date = DateTime.Today.Date;
-            LabelFontFamily(MainLabel);
-            LabelFontFamily(AnnualRateLabel);
-            LabelFontFamily(EndDateLabel);
-            LabelFontFamily(FirstPaymentLabel);
-            LabelFontFamily(LoanAmountLabel);
-            LabelFontFamily(PaymentLabel);
-            LabelFontFamily(MonthlyRateLabel);
-            LabelFontFamily(StartDateLabel);
-            LabelFontFamily(TermLabel);
+            string cultureName = "ka-GE";
+            var locale = new Java.Util.Locale(cultureName);
+            Java.Util.Locale.Default = locale;
+            App.LabelFontFamily(MainLabel);
+            App.LabelFontFamily(AnnualRateLabel);
+            App.LabelFontFamily(EndDateLabel);
+            App.LabelFontFamily(FirstPaymentLabel);
+            App.LabelFontFamily(LoanAmountLabel);
+            App.LabelFontFamily(PaymentLabel);
+            App.LabelFontFamily(MonthlyRateLabel);
+            App.LabelFontFamily(StartDateLabel);
+            App.LabelFontFamily(TermLabel);
+            RegularPaymentLabel.VerticalTextAlignment = TextAlignment.Center;
+            RegularPaymentLabel.TextColor = color;
+            RegularPaymentLabel.FontSize = 14;
+            App.LabelFontFamily(RegularPaymentLabel);
             MainLabel.VerticalTextAlignment = TextAlignment.Center;
-            MainLabel.TextColor = Color.FromRgb(2, 117, 157);
+            MainLabel.TextColor = color;
             MainLabel.FontSize = 17;
             MainLabel.HorizontalTextAlignment = TextAlignment.Center;
             AnnualRateLabel.VerticalTextAlignment = TextAlignment.Center;
-            AnnualRateLabel.TextColor = Color.FromRgb(2, 117, 157);
+            AnnualRateLabel.TextColor = color;
             AnnualRateLabel.FontSize = 14;
             EndDateLabel.VerticalTextAlignment = TextAlignment.Center;
-            EndDateLabel.TextColor = Color.FromRgb(2, 117, 157);
+            EndDateLabel.TextColor = color;
             EndDateLabel.FontSize = 14;
             FirstPaymentLabel.VerticalTextAlignment = TextAlignment.Center;
-            FirstPaymentLabel.TextColor = Color.FromRgb(2, 117, 157);
+            FirstPaymentLabel.TextColor = color;
             FirstPaymentLabel.FontSize = 14;
             LoanAmountLabel.VerticalTextAlignment = TextAlignment.Center;
             LoanAmountLabel.FontSize = 14;
-            LoanAmountLabel.TextColor = Color.FromRgb(2, 117, 157);
+            LoanAmountLabel.TextColor = color;
             PaymentLabel.VerticalTextAlignment = TextAlignment.Center;
-            PaymentLabel.TextColor = Color.FromRgb(2, 117, 157);
+            PaymentLabel.TextColor = color;
             PaymentLabel.FontSize = 14;
             MonthlyRateLabel.VerticalTextAlignment = TextAlignment.Center;
-            MonthlyRateLabel.TextColor = Color.FromRgb(2, 117, 157);
+            MonthlyRateLabel.TextColor = color;
             MonthlyRateLabel.FontSize = 14;
             StartDateLabel.VerticalTextAlignment = TextAlignment.Center;
-            StartDateLabel.TextColor = Color.FromRgb(2, 117, 157);
+            StartDateLabel.TextColor = color;
             StartDateLabel.FontSize = 14;
             TermLabel.VerticalTextAlignment = TextAlignment.Center;
-            TermLabel.TextColor = Color.FromRgb(2, 117, 157);
+            TermLabel.TextColor = color;
             TermLabel.FontSize = 14;
             #endregion
             ToolbarItems.Add(new ToolbarItem("X", "X", () =>
@@ -75,137 +88,33 @@ namespace BCLoanCalculator
                 PaymentEntry.Text = string.Empty;
             }));
             Btn.TextColor = Color.White;
-            Btn.BackgroundColor = Color.FromRgb(2, 117, 157);
-            Btn.FontFamily = Device.OnPlatform(
-                                                null,
-                                                 "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
-                                                  null
-                                                );
+            Btn.BackgroundColor = color;
+            App.ButtonFontFamily(Btn);
             Btn.Clicked += async (sender, e) =>
             {
-                await App.NavigateMasterDetail(new GridViewFlatMonthly());
+                await App.NavigateMasterDetail(new GridViewFlatMonthly(Model.GetGraphViewModel()));
             };
+            AnnualRateEntry.Completed += AnnualRateEntry_Completed;
+            MonthlyRateEntry.Completed += MonthlyRateEntry_Completed;
         }
-        public class FlatRateMonthlyCalc : INotifyPropertyChanged
+
+        private void MonthlyRateEntry_Completed(object sender, EventArgs e)
         {
-            #region privateVariables
-            private string loanAmount = App.LoanAmountFM;
-            private string termsOfLoan = App.TermFM;
-            private string monthlyRate = App.MonthlyRateFM;
-            private string annualRate = App.AnnualRateFM;
-            private string payment = App.PaymentFM;
-            private DateTime startDate = App.StartDateFM;
-            private DateTime endDate = App.EndDateFM;
-            private DateTime firstPaymentDate = App.ReleaseDateFM;
+            if (App.Parse(MonthlyRateEntry.Text) == true)
 
-
-            #endregion
-
-            public event PropertyChangedEventHandler PropertyChanged;
-            void OnPropertyChanged([CallerMemberName] string name = "")
             {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+                AnnualRateEntry.Text = Math.Round(Convert.ToDecimal(MonthlyRateEntry.Text) * 12, 3, MidpointRounding.AwayFromZero).ToString() ;
             }
-
-            public string LoanAmount
-            {
-                get { return loanAmount; }
-                set
-                {
-                    loanAmount = value;
-                    App.LoanAmountFM = value;
-                }
-            }
-
-            public string TermsOfLoan
-            {
-                get { return termsOfLoan; }
-                set
-                {
-                    termsOfLoan = value;
-                    App.TermFM = value;
-                }
-            }
-
-            public string MonthlyRate
-            {
-                get { return monthlyRate; }
-                set
-                {
-                    monthlyRate = value;
-                    App.MonthlyRateFM = value;
-
-                   // annualRate = Math.Round((Convert.ToDouble(monthlyRate) * 12), 3, MidpointRounding.AwayFromZero).ToString();
-                    OnPropertyChanged(nameof(AnnualRate));
-                    OnPropertyChanged();
-                }
-            }
-
-            public string AnnualRate
-            {
-                get { return annualRate; }
-                set
-                {
-                    annualRate = value;
-                    App.AnnualRateFM = value;
-
-                  //  monthlyRate = Math.Round((Convert.ToDouble(annualRate) / 12), 3, MidpointRounding.AwayFromZero).ToString();
-                    OnPropertyChanged();
-                    OnPropertyChanged(nameof(MonthlyRate));
-                }
-            }
-
-            public string Payment
-            {
-                get { return payment; }
-                set
-                {
-                    payment = value;
-                    App.PaymentFM = value;
-
-                }
-            }
-
-            public DateTime StartDate
-            {
-                get { return startDate; }
-                set
-                {
-                    startDate = value;
-                    App.StartDateFM = value;
-
-                }
-            }
-
-            public DateTime EndDate
-            {
-                get { return endDate; }
-                set
-                {
-                    endDate = value;
-                    App.EndDateFM = value;
-
-                }
-            }
-
-            public DateTime FirstPaymentDate
-            {
-                get { return firstPaymentDate; }
-                set
-                {
-                    firstPaymentDate = value;
-                    App.ReleaseDateFM = value;
-                }
-            }
-
         }
-        public void LabelFontFamily(Label label)
+
+        private void AnnualRateEntry_Completed(object sender, EventArgs e)
         {
-            label.FontFamily = Device.OnPlatform(
-                                                null,
-                                                 "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
-                                                  null
-                                                );
+
+            if (App.Parse(AnnualRateEntry.Text) == true)
+
+            {
+                MonthlyRateEntry.Text = Math.Round(Convert.ToDecimal(AnnualRateEntry.Text) / 12, 3, MidpointRounding.AwayFromZero).ToString() ;
+            }
         }
     }
 }

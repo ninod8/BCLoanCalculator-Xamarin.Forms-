@@ -13,14 +13,18 @@ namespace BCLoanCalculator
         public Master()
         {
             InitializeComponent();
-            LabelFontFamily(ELMonthlyButton);
-            LabelFontFamily(ELDailyButton);
-            LabelFontFamily(FDailyButton);
-            LabelFontFamily(FMonthlyButton);
+            App.ButtonFontFamily(ELMonthlyButton);
+            App.ButtonFontFamily(ELDailyButton);
+            App.ButtonFontFamily(FDailyButton);
+            App.ButtonFontFamily(FMonthlyButton);
+            App.ButtonFontFamily(ScenarioButton);
+            ScenarioButton.Clicked += async (sender, e) =>
+            {
+                await App.NavigateMasterDetail(new Scenario());
+            };
             ELDailyButton.Clicked += async (sender, e) =>
             {
                 await App.NavigateMasterDetail(new AnnuityDaily());
-
             };
             FDailyButton.Clicked += async (sender, e) =>
             {
@@ -34,15 +38,6 @@ namespace BCLoanCalculator
             {
                 await App.NavigateMasterDetail(new FlatMonthly());
             };
-
-        }
-        public void LabelFontFamily(Button label)
-        {
-            label.FontFamily = Device.OnPlatform(
-                                                null,
-                                                 "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
-                                                  null
-                                                );
         }
     }
 }

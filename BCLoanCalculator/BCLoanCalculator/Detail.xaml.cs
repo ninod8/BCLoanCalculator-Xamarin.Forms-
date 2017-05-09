@@ -13,35 +13,20 @@ namespace BCLoanCalculator
     {
         public Detail()
         {
-         
             InitializeComponent();
             bc.WidthRequest = 150;
             bc.HeightRequest = 150;
-           ////////////////////////////////////////////////////////<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<gasuptaveba
-            Label.Text = "ბიზნეს კრედიტი";
+            Label1.Text = "ბიზნეს კრედიტი";
             Label2.Text = "___ფული, რომელიც გეხმარება___";
-            LabelFontFamily(Label);
-            LabelFontFamily(Label2);
-        Label.FontSize = 25;
+            App.LabelFontFamily(Label1);
+            App.LabelFontFamily(Label2);
+            Label1.FontSize = 25;
             Label2.FontSize = 16;
-            Label.VerticalTextAlignment = TextAlignment.Center;
-                Label.HorizontalTextAlignment = TextAlignment.Center;
+            Label1.VerticalTextAlignment = TextAlignment.Center;
+            Label1.HorizontalTextAlignment = TextAlignment.Center;
             Label2.HorizontalTextAlignment = TextAlignment.Center;
-            Label.TextColor = Color.FromRgb(2,117,157);
-            Label2.TextColor = Color.FromRgb(210,87,39);
-
-         
-
-        }          public void LabelFontFamily(Label label)
-        {
-            label.FontFamily = Device.OnPlatform(
-                                                null,
-                                                 "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
-                                                  null
-                                                );
-        //    label.FontAttributes = FontAttributes.Bold;
-
-        }
-        
+            Label1.TextColor = Color.FromRgb(2, 117, 157);
+            Label2.TextColor = Color.FromRgb(210, 87, 39);
+        }  
     }
 }

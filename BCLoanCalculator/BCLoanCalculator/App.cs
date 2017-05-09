@@ -11,53 +11,45 @@ namespace BCLoanCalculator
     public class App : Application
     {
         public static MasterDetailPage MasterDetail { get; set; }
-
         public async static Task NavigateMasterDetail(Page page)
         {
             App.MasterDetail.IsPresented = false;
             await App.MasterDetail.Detail.Navigation.PushAsync(page);
         }
-        internal static string PmtAD;
-        internal static string LoanAmountAD;
-        internal static string LoanAmountAM;
-        internal static string LoanAmountFM;
-        internal static string LoanAmountFD;
-
-        internal static string DailyRateAD;
-        internal static string DailyRateFD;
-        internal static string MonthlyRateFM;
-        internal static string MonthlyRateAM;
-
-        internal static string InterestOnlyAD;
-        internal static string InterestOnlyAM;
-
-        internal static string AnnualRateAD;
-        internal static string AnnualRateAM;
-        internal static string AnnualRateFM;
-        internal static string AnnualRateFD;
-
-        internal static string TermAD;
-        internal static string TermAM;
-        internal static string TermFM;
-        internal static string TermFD;
-
-        internal static string PaymentAD;
-        internal static string PaymentAM;
-        internal static string PaymentFM;
-        internal static string PaymentFD;
-
-        internal static DateTime StartDateAD = DateTime.Today.Date.AddMonths(1);
-        internal static DateTime StartDateAM= DateTime.Today.Date;
-        internal static DateTime StartDateFM= DateTime.Today.Date;
-        internal static DateTime StartDateFD= DateTime.Today.Date.AddMonths(1);
-
-        internal static DateTime EndDateAD  = DateTime.Today.Date;
-        internal static DateTime EndDateAM = DateTime.Today.Date.AddMonths(1);
-        internal static DateTime EndDateFM  = DateTime.Today.Date.AddMonths(1);
-        internal static DateTime EndDateFD = DateTime.Today.Date;
-
-        internal static DateTime ReleaseDateAM = DateTime.Today.Date;
-        internal static DateTime ReleaseDateFM = DateTime.Today.Date;
+        public static void LabelFontFamily(Label label)
+        {
+            label.FontFamily = Device.OnPlatform(
+                                                null,
+                                                 "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
+                                                  null
+                                                );
+        }
+        public static void ButtonFontFamily(Button button)
+        {
+            button.FontFamily = Device.OnPlatform(
+                                                null,
+                                                 "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
+                                                  null
+                                                );
+        }
+        public static void EntryFontFamily(Entry entry)
+        {
+            entry.FontFamily = Device.OnPlatform(
+                                                null,
+                                                 "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
+                                                  null
+                                                );
+        }
+        public static bool Parse(string val)
+        {
+            decimal number;
+            bool result = decimal.TryParse(val, out number);
+            if (result == true)
+            {
+                return true;
+            }
+            else return false;
+        }
         public App()
         {
             // The root page of your application            

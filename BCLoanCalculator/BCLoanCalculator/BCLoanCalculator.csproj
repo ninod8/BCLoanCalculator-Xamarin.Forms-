@@ -51,7 +51,6 @@
     <Compile Include="FlatMonthly.xaml.cs">
       <DependentUpon>FlatMonthly.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GridItem.cs" />
     <Compile Include="GridViewAnnnuityDaily.xaml.cs">
       <DependentUpon>GridViewAnnnuityDaily.xaml</DependentUpon>
     </Compile>
@@ -64,13 +63,30 @@
     <Compile Include="GridViewFlatMonthly.xaml.cs">
       <DependentUpon>GridViewFlatMonthly.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GridViewScenario.xaml.cs">
+      <DependentUpon>GridViewScenario.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Master.xaml.cs">
       <DependentUpon>Master.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\AnnuityDailyModel.cs" />
+    <Compile Include="Models\AnnuityMonthlyModel.cs" />
+    <Compile Include="Models\FlatRateDailyModel.cs" />
+    <Compile Include="Models\FlatRateMonthlyModel.cs" />
+    <Compile Include="Models\GraphViewModel.cs" />
+    <Compile Include="Models\ScenarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Scenario.xaml.cs">
+      <DependentUpon>Scenario.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic">
@@ -78,6 +94,15 @@
     </Reference>
     <Reference Include="Mono.Android">
       <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\MonoAndroid\v7.0\Mono.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\PresentationFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression">
+      <HintPath>..\..\..\..\..\..\..\..\..\Windows\Microsoft.NET\Framework\v4.0.30319\System.IO.Compression.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <HintPath>..\..\..\..\..\..\..\..\..\Windows\Microsoft.NET\Framework\v2.0.50727\System.Windows.Forms.dll</HintPath>
     </Reference>
     <Reference Include="Windows.Foundation.UniversalApiContract">
       <HintPath>..\..\..\..\..\..\..\..\..\Program Files (x86)\Windows Kits\10\References\Windows.Foundation.UniversalApiContract\2.0.0.0\Windows.Foundation.UniversalApiContract.winmd</HintPath>
@@ -105,6 +130,10 @@
     <EmbeddedResource Include="MainPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +192,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GridViewFlatDaily.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Scenario.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GridViewScenario.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

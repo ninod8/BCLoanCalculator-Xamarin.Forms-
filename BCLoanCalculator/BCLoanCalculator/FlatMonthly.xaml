@@ -13,10 +13,10 @@
       <DatePicker x:Name="DP0" Date="{Binding StartDate}" Margin="15,5"/>
       
       <Label x:Name="FirstPaymentLabel" Text="პირველი გადახდის თარიღი" FontSize="13" Font="Bold" Margin="15,5"/>
-      <DatePicker x:Name="DP1" Date="{Binding EndDate}" Margin="15,5"/>
+      <DatePicker x:Name="DP1" Date="{Binding FirstPaymentDate}" Margin="15,5"/>
       
       <Label x:Name="EndDateLabel" Text="სესხის დაფარვის თარიღი" FontSize="13" Font="Bold" Margin="15,5"/>
-      <DatePicker x:Name="DP2" Date="{Binding FirstPaymentDate}" Margin="15,5"/>
+      <DatePicker x:Name="DP2" Date="{Binding EndDate}" Margin="15,5"/>
       
       <Label  x:Name="TermLabel"  Text="სესხის ვადა (თვე)" FontSize="13" Font="Bold" Margin="15,5"/>
       <Entry Keyboard="Numeric" Text="{Binding TermsOfLoan}" x:Name="TermsOfLoanEntry"  Margin="15,5"/>
@@ -29,6 +29,10 @@
       
       <Label x:Name="PaymentLabel" Text="ყოველდღიური გადასახადი" Font="Bold" FontSize="13"  Margin="15,5"/>
       <Entry Keyboard="Numeric" Text="{Binding Payment}" x:Name="PaymentEntry"  Margin="15,5"/>
+      
+      <Label x:Name="RegularPaymentLabel" Text="რეგულარული გადასახადი" Font="Bold" FontSize="13"  Margin="15,5"/>
+      <Entry Keyboard="Numeric" x:Name="RegularPaymentEntry" Text="{Binding RegularPayment}" BackgroundColor="White" Margin="15,5"/>
+      
       <Button x:Name="Btn" Text="გრაფიკის დათვლა" />
 
     </StackLayout>

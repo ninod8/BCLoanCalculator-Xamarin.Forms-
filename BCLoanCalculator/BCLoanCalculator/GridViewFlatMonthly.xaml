@@ -3,24 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BCLoanCalculator.GridViewFlatMonthly">
   <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
-  <ScrollView Orientation="Both">
-    <Grid x:Name="grid" >
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="30" />
-        <ColumnDefinition Width="80" />
-        <ColumnDefinition Width="120"/>
-        <ColumnDefinition Width="110"/>
-        <ColumnDefinition Width="80" />
-        <ColumnDefinition Width="110"/>
-        <ColumnDefinition Width="130"/>
-      </Grid.ColumnDefinitions>
-      <Label  Margin="0,0,2,2"  x:Name="PmtNumberLabel"       Grid.Column="0"/>
-      <Label  Margin="0,5,2,2" x:Name="DateLabel"             Grid.Column="1"/>
-      <Label  Margin="0,5,2,2" x:Name="StartingBalanceLabel" Grid.Column="2"/>
-      <Label  Margin="0,5,2,2" x:Name="PaymentLabel"          Grid.Column="3"/>
-      <Label  Margin="0,5,2,2" x:Name="PrincipalLabel"        Grid.Column="4"/>
-      <Label  Margin="0,5,2,2" x:Name="RateLabel"            Grid.Column="5"/>
-      <Label  Margin="0,5,2,2" x:Name="EndingBalanceLabel"    Grid.Column="6"/>
-    </Grid>
+  <ScrollView x:Name="scroll" Orientation="Both">
+    
+        <ListView x:Name="gridData" HasUnevenRows="True">
+          <ListView.ItemTemplate>
+            <DataTemplate>
+              <ViewCell>
+                <ViewCell.View>
+                  <Grid>
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="30" />
+                      <ColumnDefinition Width="80" />
+                      <ColumnDefinition Width="120"/>
+                      <ColumnDefinition Width="110"/>
+                      <ColumnDefinition Width="80" />
+                      <ColumnDefinition Width="110"/>
+                      <ColumnDefinition Width="130"/>
+
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="{Binding PaymentNumber}"           ></Label>
+                    <Label Grid.Column="1" Text="{Binding Date}"             ></Label>
+                    <Label Grid.Column="2" Text="{Binding StartingBalance}"  ></Label>
+                    <Label Grid.Column="3" Text="{Binding Payment}"           ></Label>
+                    <Label Grid.Column="4" Text="{Binding Rate}"                   ></Label>
+                    <Label Grid.Column="5" Text="{Binding Principal}"           ></Label>
+                    <Label Grid.Column="6" Text="{Binding EndingBalance}"        ></Label>
+                  </Grid>
+                </ViewCell.View>
+              </ViewCell>
+            </DataTemplate>
+          </ListView.ItemTemplate>
+        </ListView>
   </ScrollView>
 </ContentPage>

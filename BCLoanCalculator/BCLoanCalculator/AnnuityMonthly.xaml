@@ -34,6 +34,8 @@
       
       <Label x:Name="AnnuityMonthlyPaymentLabel" Text="ყოველდღიური გადასახადი"  FontSize="13"  Margin="15,5"/>
       <Entry Keyboard="Numeric" Text="{Binding Payment}" x:Name="PaymentEntry" BackgroundColor="White" Margin="15,5"/>
+      <Label x:Name="RegularPaymentLabel" Text="რეგულარული გადასახადი" Font="Bold" FontSize="13"  Margin="15,5"/>
+      <Entry Keyboard="Numeric" x:Name="RegularPaymentEntry" Text="{Binding RegularPayment}" BackgroundColor="White" Margin="15,5"/>
       <Button x:Name="Btn" Text="გრაფიკის დათვლა" />
 
     </StackLayout>

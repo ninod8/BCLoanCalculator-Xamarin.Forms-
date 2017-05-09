@@ -1,483 +1,157 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Globalization;
 using Xamarin.Forms;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Windows.ApplicationModel.DataTransfer;
-using UIKit;
+using BCLoanCalculator.Models;
+using System.Threading.Tasks;
 using Microsoft.VisualBasic;
-using System.Reflection;
-using System.Runtime.Serialization;
 
 namespace BCLoanCalculator
 {
     public partial class AnnuityDaily : ContentPage
     {
-        public AnnuityDailyCalc LD { get; set; }
+        public AnnuityDailyModel Model
+        {
+            get
+            {
+                return BindingContext as AnnuityDailyModel;
+            }
+        }
 
         public AnnuityDaily()
         {
+          //  var userSelectedCulture = new CultureInfo("ka-GE");
             InitializeComponent();
-            this.BindingContext = LD;
- 
-            BindingContext = new AnnuityDailyCalc();
-            LD = BindingContext as AnnuityDailyCalc;
-            ToolbarItems.Add(new ToolbarItem("X", "X",  () =>
-            {
-                // var page = new ContentPage();
-                //  new AnnuityDaily();
-                TermsOfLoanEntry.Text = string.Empty;
-                LoanAmountEntry.Text = string.Empty;
-                DP1.Date = DateTime.Today;
-                DP2.Date = DateTime.Today.Date;
-                PaymentEntry.Text = string.Empty;
-                InterestOnlyEntry.Text = string.Empty;
-                AnnualRateEntry.Text = string.Empty;
-                DailyRateEntry.Text = string.Empty;
-                AnnualRateEntry.Placeholder = string.Empty;
-                DailyRateEntry.Placeholder = string.Empty;
-            }));
+            BindingContext = new AnnuityDailyModel();
+            Color color = Color.FromRgb(2, 117, 157);
+            string cultureName = "ka-GE";
+            var locale = new Java.Util.Locale(cultureName);
+        Java.Util.Locale.Default= locale;
+            Financial.Pmt(2,3,4,5);
+            ToolbarItems.Add(new ToolbarItem("X", "X", () =>
+           {
+               TermsOfLoanEntry.Text = string.Empty;
+               LoanAmountEntry.Text = string.Empty;
+               DP1.Date = DateTime.Today;
+               DP2.Date = DateTime.Today;
+               PaymentEntry.Text = string.Empty;
+               InterestOnlyEntry.Text = string.Empty;
+               AnnualRateEntry.Text = string.Empty;
+               DailyRateEntry.Text = string.Empty;
+               AnnualRateEntry.Placeholder = string.Empty;
+               DailyRateEntry.Placeholder = string.Empty;
+           }));
+            Label1.IsVisible = false;
+            Label2.IsVisible = false;
+            Label3.IsVisible = false;
             #region Interface
-            DP1.Date = DateTime.Today.Date;
-            DP2.Date = DateTime.Today.Date;
-            MainLabel.TextColor = Color.FromRgb(2, 117, 157);
+            MainLabel.TextColor = color;
             MainLabel.FontSize = 17;
-            LabelFontFamily(MainLabel);
-            LabelFontFamily(AnnuityDailyAnnualRateLabel);
-            LabelFontFamily(AnnuityDailyDailyRateLabel);
-            LabelFontFamily(AnnuityDailyEndDateLabel);
-            LabelFontFamily(AnnuityDailyInterestOnlyLabel);
-            LabelFontFamily(AnnuityDailyPaymentLabel);
-            LabelFontFamily(AnnuityDailyStartDateLabel);
-            LabelFontFamily(AnnuityDailyTermLabel);
-            LabelFontFamily(LoanAmountLabel);
+            App.LabelFontFamily(MainLabel);
+            App.LabelFontFamily(AnnuityDailyAnnualRateLabel);
+            App.LabelFontFamily(AnnuityDailyDailyRateLabel);
+            App.LabelFontFamily(AnnuityDailyEndDateLabel);
+            App.LabelFontFamily(AnnuityDailyInterestOnlyLabel);
+            App.LabelFontFamily(AnnuityDailyPaymentLabel);
+            App.LabelFontFamily(AnnuityDailyStartDateLabel);
+            App.LabelFontFamily(AnnuityDailyTermLabel);
+            App.LabelFontFamily(LoanAmountLabel);
+
+
             MainLabel.HorizontalTextAlignment = TextAlignment.Center;
             AnnuityDailyAnnualRateLabel.VerticalTextAlignment = TextAlignment.Center;
-            AnnuityDailyAnnualRateLabel.TextColor = Color.FromRgb(2, 117, 157);
+            AnnuityDailyAnnualRateLabel.TextColor = color;
             AnnuityDailyAnnualRateLabel.FontSize = 14;
             LoanAmountLabel.VerticalTextAlignment = TextAlignment.Center;
-            LoanAmountLabel.TextColor = Color.FromRgb(2, 117, 157);
+            LoanAmountLabel.TextColor = color;
             LoanAmountLabel.FontSize = 14;
             AnnuityDailyDailyRateLabel.VerticalTextAlignment = TextAlignment.Center;
             AnnuityDailyDailyRateLabel.FontSize = 14;
-            AnnuityDailyDailyRateLabel.TextColor = Color.FromRgb(2, 117, 157);
+            AnnuityDailyDailyRateLabel.TextColor = color;
             AnnuityDailyEndDateLabel.VerticalTextAlignment = TextAlignment.Center;
-            AnnuityDailyEndDateLabel.TextColor = Color.FromRgb(2, 117, 157);
+            AnnuityDailyEndDateLabel.TextColor = color;
             AnnuityDailyEndDateLabel.FontSize = 14;
             AnnuityDailyInterestOnlyLabel.VerticalTextAlignment = TextAlignment.Center;
-            AnnuityDailyInterestOnlyLabel.TextColor = Color.FromRgb(2, 117, 157);
+            AnnuityDailyInterestOnlyLabel.TextColor = color;
             AnnuityDailyInterestOnlyLabel.FontSize = 14;
             AnnuityDailyPaymentLabel.VerticalTextAlignment = TextAlignment.Center;
-            AnnuityDailyPaymentLabel.TextColor = Color.FromRgb(2, 117, 157);
+            AnnuityDailyPaymentLabel.TextColor = color;
             AnnuityDailyPaymentLabel.FontSize = 14;
             AnnuityDailyStartDateLabel.VerticalTextAlignment = TextAlignment.Center;
-            AnnuityDailyStartDateLabel.TextColor = Color.FromRgb(2, 117, 157);
+            AnnuityDailyStartDateLabel.TextColor = color;
             AnnuityDailyStartDateLabel.FontSize = 14;
             AnnuityDailyTermLabel.VerticalTextAlignment = TextAlignment.Center;
-            AnnuityDailyTermLabel.TextColor = Color.FromRgb(2, 117, 157);
+            AnnuityDailyTermLabel.TextColor = color;
             AnnuityDailyTermLabel.FontSize = 14;
-            Btn.BackgroundColor = Color.FromRgb(2, 117, 157);
-            Btn.TextColor = Color.White;
-            PaymentEntry.FontFamily = Device.OnPlatform(
-                                                null,
-                                                 "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
-                                                  null
-                                                );
-            Label1.FontFamily = Device.OnPlatform(
-                                       null,
-                                        "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
-                                         null
-                                       );
-            Label2.FontFamily = Device.OnPlatform(
-                                       null,
-                                        "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
-                                         null
-                                       );
-            Btn.FontFamily = Device.OnPlatform(
-                                                null,
-                                                 "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
-                                                  null
-                                                );
+            RegularPaymentLabel.VerticalTextAlignment = TextAlignment.Center;
+            RegularPaymentLabel.TextColor = color;
+            RegularPaymentLabel.FontSize = 14;
+            App.LabelFontFamily(RegularPaymentLabel);
+            CalculateGraph.BackgroundColor = color;
+            CalculateGraph.TextColor = Color.White;
+            App.ButtonFontFamily(CalculateGraph);
+            App.EntryFontFamily(PaymentEntry);
+            App.LabelFontFamily(Label1);
+            App.LabelFontFamily(Label2);
+            App.LabelFontFamily(Label3);
+
             #endregion
 
-            AnnualRateEntry.TextChanged += (object sender, TextChangedEventArgs e) =>
-                {
-                    try
-                    { 
-                        DailyRateEntry.Text = "";
-                        //double j = ;
-                        string g = Math.Round((Convert.ToDouble(AnnualRateEntry.Text) / 365), 3, MidpointRounding.AwayFromZero).ToString("N", CultureInfo.InvariantCulture);
-                        DailyRateEntry.Placeholder = g + "%"; 
-                      // App.data =  AnnualRateEntry.Text;
-                      
-                    }
-                    catch (System.Exception)
-                    {
 
-
-                    }
-
-                };
-            Btn.Clicked += async (sender, e) =>
+            CalculateGraph.Clicked += async(sender, e) =>
             {
                 var btn = sender as Button;
-                await App.NavigateMasterDetail(new GridViewAnnnuityDaily());
+            
+              
+                     await App.NavigateMasterDetail(new GridViewAnnnuityDaily(Model.GetGraphViewModel()));
+
+                 
+
             };
-            DailyRateEntry.TextChanged += (object sender, TextChangedEventArgs e) =>
-              {
-                  try
-                  {
-                      AnnualRateEntry.Text = "";
-                      string g = Math.Round((Convert.ToDouble(DailyRateEntry.Text) * 365), 3, MidpointRounding.AwayFromZero).ToString("N", CultureInfo.InvariantCulture);
-                      AnnualRateEntry.Placeholder = g + "%";
-                      App.AnnualRateAD = AnnualRateEntry.Placeholder;
-                  }
-                  catch (Exception)
-                  {
 
-                  }
-
-              };
             PaymentEntry.TextChanged += (object sender, TextChangedEventArgs e) =>
               {
-                  try
-                  {
-                      double paymentSum = Convert.ToDouble(App.PmtAD) * Convert.ToDouble(App.TermAD);
-                      double rateSum = paymentSum - Convert.ToDouble(App.LoanAmountAD);
-                      Label1.Text = "გადახდების ჯამი: "+ paymentSum.ToString("N", CultureInfo.InvariantCulture);
-                      Label2.Text = "პროცენტის ჯამი: "+ rateSum.ToString("N", CultureInfo.InvariantCulture);
-                 //     Label3.Text="ეფექტური პროცენტი: "+ 
-                  }
-                  catch (Exception)
-                  {
-                  }
+
+                  var model = BindingContext as AnnuityDailyModel;
+                  //if (model.PMT().HasValue)
+                  //{
+                  //    decimal paymentSum = model.PMT().Value * model.TermsOfLoan;
+                  //    decimal rateSum = paymentSum - model.LoanAmount.Value;
+                  //    Label1.IsVisible = true;
+                  //    Label2.IsVisible = true;
+                  //    Label1.Text = "გადახდების ჯამი: " + paymentSum.ToString("N", CultureInfo.InvariantCulture);
+                  //    Label2.Text = "პროცენტის ჯამი: " + rateSum.ToString("N", CultureInfo.InvariantCulture);
+                  //}
               };
-            // AnnuityDailyEntry.Placeholder=
-        }
-        public void LabelFontFamily(Label label)
-        {
-            label.FontFamily = Device.OnPlatform(
-                                                null,
-                                                 "bpg_nino_mtavruli_bold.ttf#bpg_nino_mtavruli_bold", // Android
-                                                  null
-                                                );
+            PaymentEntry.Completed += PaymentEntry_Completed;
+            DailyRateEntry.Completed += DailyRateEntry_Completed;
+            AnnualRateEntry.Completed += AnnualRateEntry_Completed;
+
         }
 
-    }
-    public class AnnuityDailyCalc : INotifyPropertyChanged
-    {
-        #region privateVariables
-        private string loanAmount = App.LoanAmountAD;
-        private string termsOfLoan=App.TermAD;
-        private string dailyRate=App.DailyRateAD;
-        private string annualRate=App.AnnualRateAD;
-        private string payment=App.PaymentAD;
-        private DateTime startDate=App.StartDateAD;
-        private DateTime endDate=App.EndDateAD;
-        private string interestOnly=App.InterestOnlyAD;
-
-        #endregion
-        public event PropertyChangedEventHandler PropertyChanged;
-        void OnPropertyChanged([CallerMemberName]string name = "")
+        private void PaymentEntry_Completed(object sender, EventArgs e)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            var model = BindingContext as AnnuityDailyModel;
+            TermsOfLoanEntry.Text = model.Nper().ToString();
         }
 
-        public string LoanAmount
+        private void AnnualRateEntry_Completed(object sender, EventArgs e)
+
         {
-            get { return loanAmount; }
-            set
+            if (App.Parse(AnnualRateEntry.Text) == true)
+
             {
-                try
-                {
-                    loanAmount = value;
-                    //  if (Convert.ToDouble(payment) > 0)
-                    //  {
-                    //      termsOfLoan = NperDaily();
-                    //  }
-                    //else
-                    App.LoanAmountAD = value;
-                    payment = PMT();
-
-                    OnPropertyChanged(nameof(LoanAmount));
-                    OnPropertyChanged(nameof(DailyRate));
-                    OnPropertyChanged(nameof(AnnualRate));
-                    OnPropertyChanged(nameof(Payment));
-                    OnPropertyChanged(nameof(EndDate));
-                    OnPropertyChanged(nameof(StartDate));
-                    OnPropertyChanged(nameof(TermsOfLoan));
-                    OnPropertyChanged(nameof(InterestOnly));
-                }
-                catch (Exception)
-                {
-                }
-
+                DailyRateEntry.Text = Math.Round(Convert.ToDecimal(AnnualRateEntry.Text) / 365, 3, MidpointRounding.AwayFromZero).ToString();
             }
         }
 
-        public string TermsOfLoan
+        private void DailyRateEntry_Completed(object sender, EventArgs e)
         {
-            get { return termsOfLoan; }
-            set
+            if (App.Parse(DailyRateEntry.Text) == true)
             {
-                try
-                {
-                    termsOfLoan = value;
-                    App.TermAD = value;
-                    endDate = startDate.Date.AddDays(Convert.ToDouble(termsOfLoan));
-                    // if (Convert.ToDouble(payment) > 0)
-                    // {
-                    //     termsOfLoan = NperDaily();
-                    // }
-                    //else
-                    payment = PMT();
-                    OnPropertyChanged(nameof(LoanAmount));
-                    OnPropertyChanged(nameof(DailyRate));
-                    OnPropertyChanged(nameof(AnnualRate));
-                    OnPropertyChanged(nameof(Payment));
-                    OnPropertyChanged(nameof(EndDate));
-                    OnPropertyChanged(nameof(StartDate));
-                    OnPropertyChanged(nameof(TermsOfLoan));
-                    OnPropertyChanged(nameof(InterestOnly));
-                    OnPropertyChanged();
-                }
-                catch (Exception)
-                {
-                }
-            }
-        }
-
-        public string DailyRate
-        {
-            get { return dailyRate; }
-            set
-            {
-                try
-                {
-                    dailyRate = value;
-                    App.DailyRateAD = value;
-                    payment = PMT();
-
-                    OnPropertyChanged(nameof(LoanAmount));
-                    OnPropertyChanged(nameof(DailyRate));
-                    OnPropertyChanged(nameof(AnnualRate));
-                    OnPropertyChanged(nameof(Payment));
-                    OnPropertyChanged(nameof(EndDate));
-                    OnPropertyChanged(nameof(StartDate));
-                    OnPropertyChanged(nameof(TermsOfLoan));
-                    OnPropertyChanged(nameof(InterestOnly));
-                }
-                catch (Exception)
-                {
-                 
-                }
+                AnnualRateEntry.Text = Math.Round(Convert.ToDecimal(DailyRateEntry.Text) * 365, 3, MidpointRounding.AwayFromZero).ToString();
             }
         }
 
 
-        public string AnnualRate
-        {
-            get { return annualRate; }
-            set
-            {
-                try
-                {
-                    annualRate = value;
-                    App.AnnualRateAD = value;
-                    payment = PMT();
-
-                    OnPropertyChanged(nameof(LoanAmount));
-                    OnPropertyChanged(nameof(DailyRate));
-                    OnPropertyChanged(nameof(AnnualRate));
-                    OnPropertyChanged(nameof(Payment));
-                    OnPropertyChanged(nameof(EndDate));
-                    OnPropertyChanged(nameof(StartDate));
-                    OnPropertyChanged(nameof(TermsOfLoan));
-                    OnPropertyChanged(nameof(InterestOnly));
-                }
-                catch (Exception)
-                {
-
-                }
-            }
-        }
-
-
-        public string Payment
-        {
-            get { return payment; }
-            set
-            {
-                payment = value;
-                
-               // App.PaymentAD = PMT();
-                try
-                {
-                    //if (Convert.ToDouble(payment) > 0)
-                    //{
-                    //    termsOfLoan = NperDaily();
-                    //}
-                    OnPropertyChanged(nameof(TermsOfLoan));
-                }
-                catch (Exception)
-                {
-                }
-            }
-        }
-
-
-        public DateTime StartDate
-        {
-            get { return startDate; }
-            set
-            {
-                try
-                {
-                    startDate = value;
-                    App.StartDateAD = value;
-                    termsOfLoan = CountDays();
-                    // if (Convert.ToDouble(payment) > 0)
-                    // {
-                    //     termsOfLoan = NperDaily();
-                    // }
-                    //else
-                  //  payment = PMT();
-                    OnPropertyChanged(nameof(LoanAmount));
-                    OnPropertyChanged(nameof(DailyRate));
-                    OnPropertyChanged(nameof(AnnualRate));
-                    OnPropertyChanged(nameof(Payment));
-                    OnPropertyChanged(nameof(EndDate));
-                    OnPropertyChanged(nameof(StartDate));
-                    OnPropertyChanged(nameof(TermsOfLoan));
-                    OnPropertyChanged(nameof(InterestOnly));
-                }
-                catch (Exception)
-                {
-                }
-            }
-        }
-
-        public DateTime EndDate
-        {
-            get { return endDate; }
-            set
-            {
-                try
-                {
-                    endDate = value;
-                    App.EndDateAD = value;
-                    termsOfLoan = CountDays();
-                    //if (Convert.ToDouble(payment) > 0)
-                    //{
-                    //    termsOfLoan = NperDaily();
-                    //}
-                    //else 
-                 //   payment = PMT();
-
-                    OnPropertyChanged(nameof(LoanAmount));
-                    OnPropertyChanged(nameof(DailyRate));
-                    OnPropertyChanged(nameof(AnnualRate));
-                    OnPropertyChanged(nameof(Payment));
-                    OnPropertyChanged(nameof(EndDate));
-                    OnPropertyChanged(nameof(StartDate));
-                    OnPropertyChanged(nameof(TermsOfLoan));
-                    OnPropertyChanged(nameof(InterestOnly));
-                }
-                catch (Exception)
-                {
-                }
-            }
-        }
-
-        public string InterestOnly
-        {
-            get { return interestOnly; }
-            set
-            {
-                try
-                {
-                    interestOnly = value;
-                    App.InterestOnlyAD = value;
-                    //if (Convert.ToDouble(payment) > 0)
-                    //{
-                    //    termsOfLoan = NperDaily();
-                    //}
-                    //else
-                    payment = PMT();
-
-                    OnPropertyChanged(nameof(LoanAmount));
-                    OnPropertyChanged(nameof(DailyRate));
-                    OnPropertyChanged(nameof(AnnualRate));
-                    OnPropertyChanged(nameof(Payment));
-                    OnPropertyChanged(nameof(EndDate));
-                    OnPropertyChanged(nameof(StartDate));
-                    OnPropertyChanged(nameof(TermsOfLoan));
-                    OnPropertyChanged(nameof(InterestOnly));
-                }
-                catch (Exception)
-                {
-
-                }
-
-            }
-        }
-
-        public string CountDays()
-        {
-
-            int days = (endDate - startDate).Days;
-           // if (days == 0) return "";
-            return days.ToString();
-
-        }
-
-        public string PMT()
-        {
-            try
-            {
-               
-                double interestonly;
-                if (String.IsNullOrEmpty(InterestOnly))
-                {
-                    interestonly = 0;
-                }
-                else interestonly = Convert.ToInt32(InterestOnly);
-                double rate = Convert.ToDouble(DailyRate) / 100;
-                double pmt = Convert.ToDouble(LoanAmount) * Convert.ToDouble(rate) / (1 - (1 / (Math.Pow(Convert.ToDouble(rate + 1), Convert.ToDouble(TermsOfLoan) - interestonly))));
-                //  double nper = Convert.ToDouble(TermsOfLoan) - interestonly;
-                //   double payment=  Financial.Pmt(rate, nper, Convert.ToDouble(LoanAmount), 0, DueDate.EndOfPeriod);
-                if (!Double.IsNaN(pmt) && !Double.IsInfinity(pmt) && pmt > 0)
-                {
-                    string val= Math.Round(pmt, 2, MidpointRounding.AwayFromZero).ToString("N", CultureInfo.InvariantCulture);
-                    App.PmtAD = val;
-                    return val;
-                  
-                }
-                else return "";
-            }
-            catch (Exception)
-            {
-                return "სწორად შეავსეთ ველები";
-            }
-        }
-
-        public string NperDaily()
-        {
-            double nper = 0;
-            try
-            {
-                double rate = Convert.ToDouble(DailyRate) / 100;
-                nper = -Math.Log((1 - (rate * Convert.ToDouble(LoanAmount) / Convert.ToDouble(Payment))), Math.E) / Math.Log((1 + rate), Math.E);
-                return Convert.ToInt32(nper).ToString();
-            }
-            catch (Exception)
-            {
-                return "";
-            }
-        }
     }
 }
